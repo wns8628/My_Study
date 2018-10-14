@@ -1,0 +1,318 @@
+와치 
+
+변경이 되나안되나 계속 지켜본다 
+
+변경이되면 다시 껏다 켜줌
+
+ supervisor 이라는것을 쓰면 직접 껏다안켜도됨 
+
+ 여러가지 사용법이있으니 뭐 안될때 찾아서 해결하면된다
+
+----------------------------------------------------------------------------------
+
+ 현대적인 웹을 만들어보자. 
+
+
+ 1] 폼으로 정보를 작성해서 서버로 보냄 
+
+ 2] 그정보를 서버가 data폴더에 저장하고있다가
+
+ 3] 웹페이지에 그정보를 나타낸다
+
+
+ 웹페이지는 topic
+
+ 정보작성은 topic/new 
+
+ 에 할것이다. 
+
+
+ * 어떻게 저장할것인가 ?? 
+
+    - 현대에는 데이터베이스에 저장          : 포크레인 
+    - 근데 일단 우리는 파일에저장할거다.    : 삽
+
+
+설계-
+
+  app_file.js         = 웹서버파일 
+
+
+ 폴더
+
+  data                = 사용자가적은 정보가적힌 파일을여기다저장 
+
+  views_file          = 템플릿엔진 파일 여기다저장 
+
+  public_file         = 스태틱한파일여기저장 (정적인것)
+
+
+---------------------------------------------------------------------------
+
+ 1] app_file.js 
+
+    express                  모듈가져오기
+    var app  = express();    모듈로 애플리케이션객체만들기 
+
+    app.listen(3000,콜백);   애플리케이션객체 메소드로 포트리스닝하기 
+
+----------------------------------------------- 
+ 2] 라우팅하기 
+
+    1.  app.get('/topic/new',콜백)       글작성페이지
+
+    2.
+      app.set('views','./views_file');   
+      app.set('view engine', 'jade');    템플린엔진세팅
+
+    3.
+      views_file 이라는 폴더를만들고 거기다 jade파일만듬 
+
+    4. res.render('jade파일이름')         콜백안에서 이걸로 렌더링함 
+  
+--------------------------------------------- 
+ 3] ~~jade로 폼페이지만들기 ~~~ 
+  
+    * 페이지에서 못생기게나오면   
+      app.locals.pretty = true;
+ 
+    * 작성한것은 /topic 으로보낸다. (post방식)
+
+-------------------------------------------------
+ 4] post 라우팅
+    
+  1. 바디파써 모듈다운
+  
+     var bodyParser = require('body-parser');
+     app.use(bodyParser.urlencoded({ extended: false }));  우리앱에 바디파써 미들웨어 추가
+
+  
+  2.app.post('/topic', 콜백)              = 이제 콜백에 req.body.~ 이거가능
+
+    
+    이제 사용자가 입력한 제목과 본문을 가져올수있다.  
+
+------------------------------------------------
+ 
+ 5] data폴더에 사용자정보저장 = 입력
+
+   파일이름 = 사용자가 작성한 제목   
+   파일내용 = 사용자가 작성한 본문  
+
+          이렇게 할것이다. 
+
+
+    1. nodejs가 제공하는 파일시스템이용
+ 
+            var fs = require('fs');       =모듈가져와서
+
+
+    2. fs.writeFile(파일제목,데이타(옵션),콜백) 이렇게씀   (콜백형식=인자로 err)
+
+        fs.writeFile('data/'+title, description,function(err){    =(첫번째인자(data밑에 title 이름으로만들고),본문은(description) ,콜백) 
+       	  if(err){                                                = 콜백함수, err발생시 
+              console.log(err);      	                          = 콘솔에 에러정보출력 
+  	      res.status(500).send('내부적에러발생!');            = 서버에 에러500전송 사용자에게 내부적에러발생! 홈피에뜨도록!
+	  }
+          res.send('Success!!')                                   =에러없으면 석세스글이 홈피에뜸 
+       })                     
+            
+---------------------------------------------------
+    
+  6] 저장된데이터를 읽어오는것 = 출력 리스트출력--
+
+   url을 직접쳐서 /topic 으로 접속해보면 안됨 왜? get라우터가 없으니
+
+   app.get('/topic',function(req,res){
+	  res.render('view');
+	})                                  라우터만들고
+
+
+   여기서 list 를 사용자가 입력한 title 이니깐  이걸할려면
+
+
+  7] fs.readdir 을쓰면된다.
+
+    fs.readdir(경로,콜백(err,files))    **files는 경로의 파일이름을 배열형식으로 가지고있음 
+
+   app.get('/topic',function(req,res){             
+     fs.readdir('data',function(err,files){            
+       if(err){                                      
+         console.log(err);
+         res.status(500).send('에러발생!');
+     }else {
+       res.render('view', {topics:files});   --파일제목을 배열형식이니 그것을 topics변수에 리턴
+      }
+     })
+   })
+    
+ 
+  8] 
+
+      topics 변수를 이용해서
+
+          view.jade파일에 반복문으로 배열의값을 리스트를출력하면됨 
+     
+
+     	 each topic in topics
+     	   li
+             a(href='/topic/'+topic)= topic          이렇게 하면됨 = jade홈피에 반복문설명서보면됨
+
+
+
+------------------------------------------------------------------------
+
+ 9] 본문 출력
+
+   위에서 a(href='/topic/'+topic)  즉 topic/글제목 이걸통해서 본문을나타내야하니깐
+
+   라우터에 
+
+   app.get('/topic/:id',콜백(req,res){
+
+	   var id = req.params.id;          이런식으로 담아낼수있다 
+   	   res.send(id);                  
+	}) 
+
+
+ 10] 자이제 아디값을 알아냈으니 그 id값의 해당하는 파일을 읽어서가져와야겠찌
+
+     fs.readFile('data/'+id,'utf8',function(err, data){              -리드파일메소드를이용하면됨
+         if(err){                                      
+        	 console.log(err);
+         	res.status(500).send('에러발생!');
+	   }else{
+                res.send(data);              --에러가없으면 홈페이지 내용으로 data 즉 파일내용을보여준다.                   
+	}    
+      })
+
+---------이제 그럴듯하다!!!------------------------------------
+
+ 11] 본문을 리스트 랑같이나오도록 해보자
+
+   app.get('/topic/:id',function(req,res){
+  var id = req.params.id;
+  fs.readdir('data',function(err,files){
+    if(err){
+      console.log(err);
+      res.status(500).send('에러발생!');
+  }
+  fs.readFile('data/'+id,'utf8',function(err,data){
+    if(err){
+      console.log(err);
+      res.status(500).send('에러발생!');
+    }else{
+      res.render('view', {title:id, topics:files, description:data});
+    }
+  })
+  })
+})
+
+
+  이렇게하고 view 파일에 변수들을 써서 출력하면된다. 
+
+
+----------------------------------------------------------------------------------------------------------------------
+
+ 중복제거 와 정리--------------------------------------------------------------------------------------------------
+ 
+ * get 라우터를 배열로 여러개를받을수있다.
+
+
+app.get(['/topic','/topic/:id'],function(req,res){                  //이런식으로 라우터를 여러개 받음 
+  fs.readdir('data',function(err,files){
+    if(err){
+      console.log(err);
+      res.status(500).send('에러발생!');
+      }                                           ---------------------중복부분 모든부분에나오는곳
+      var id = req.params.id;  
+      if(id){                                               -----------중복아닌곳 id가 있으면 없으면에 따라출력 
+      //아디값이 있으면
+        fs.readFile('data/'+id,'utf8',function(err,data){
+          if(err){
+            console.log(err);
+            res.status(500).send('에러발생!');
+          }
+            res.render('view', {title:id, topics:files, description:data});
+        })
+      }else{ //아디값이없으면
+        res.render('view', {topics:files, title:'어서오세요'});
+      }
+      })
+})
+ 
+
+---------------------
+
+   res.redirect('/topic/'+title);       폼으로 정보 보냈을때(submit눌렀을때) 뜨는 창 설정
+
+
+--------------------------------------------------
+app.get('/topic/new', function(req, res){
+  fs.readdir('data',function(err,files){
+    if(err){
+      console.log(err);
+      res.status(500).send('에러발생!');
+    }                                    -------------이게있어야 topics 변수를 쓸수있으니깐
+  res.render('new', {topics:files});
+ })
+})
+
+
+  --글쓰는페이지에도 리스트밑에 글적는거 나오도록-- 
+
+ *new.jade 에도 위에html을 넣고 설정해야겠지 ? 
+
+ 
+
+---------------------------------------------------------------------
+
+                                                            *
+ jade 할때 띄어쓰기 잘하고 들여쓰기 중요함!!                *
+                                                            *  
+ 웹페이지에 자바스크립트나                                  *
+                                                            *
+ css적용할려면                                              *
+                                                            *
+ public폴더 즉 스태틱한것넣는곳에 넣어놓고                  *
+                                                            *
+ 쓰면된다!!!!                                               *
+                                                            *
+*************************************************************
+
+   
+ 
+
+ 
+
+    
+            
+
+
+
+
+
+  
+
+
+
+
+                
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+ 

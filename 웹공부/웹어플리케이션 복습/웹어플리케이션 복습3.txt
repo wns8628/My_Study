@@ -1,0 +1,79 @@
+3장-----------------
+
+이제 클릭하면 그 클릭한 글에 해당된 글이 나오도록 해보자 ! 
+
+1) 타이틀 나오는 걸 링크를달고 <a 태그로> ex)   echo '<a href="index.php?id='.$row[id].'">'.$row['title'].'</a><br />';
+
+링크뒤에 id값이 바껴서 이걸이용 하자 * htmlspecialchars 로 보안처리도해도됨(숫자(id값)는 공격적인걸못해서 안해도됨)
+
+
+
+2) 이제 링크누르면 url 아디값이 바뀌니 그 아디값을 index.php 로가져오면 그아디값에 따라 다른 본문을 가져오자!
+
+ 2-1] $id = $_GET['id'];                            //아디값을 일단 가져오는거 
+ 
+ 2-2] $sql ="SELETC * FROM topic WHERE id = ".$id; //그걸로 sql 구문을 만들어 $sql에 저장 (링크바뀔떄마다 구문이 id=1 ,2 이런식으로바뀜)
+
+		구지확인할려면 echo $sql; 해보던지 
+
+ 2-3] 이제 날려야겠지 저 구문을디비로 날려서 값을 나타나게하자
+
+	$result = mysqli_query($conn,$sql);  //연결해서 커리날려서 데이터가져오고
+ 	$row = mysqli_fetch_assoc($result);  // 그걸 패치(php가 알아먹을수있게) 가공 한뒤 
+		
+	 echo $row['description']; 이런식으로 .. 쓰면됨  = id값에따라 내용이달라지겠지
+
+ 데이터를 처리하는것까지 ! 우리가했다 
+
+
+ 자 근데 db에서 topic 에 author (작성자) 가 1 로되어있다 
+
+ user 테이블에서 아디가 1 인것과 조인이되어있어서 user테이블에 id값이 1인 것의 작성자가 썻다는것을 알수있다 
+
+ 조인으로 조회하면된다 
+
+   SELECT * FROM topic LEFT JOIN user ON topic.author = user.id; 
+
+  ( topic 의 author가 1번이면 user의 id값이 1번인 행이 붙어온다) 
+    
+    근데 둘다 id가 있다=  헷갈린다
+
+  그래서 SELECT * FROM 말고 이건 다가져오는거니깐 
+
+   SELECT topic.id, 
+          topic.title, 
+          topic.description, 
+          user.name,
+          topic.created
+                             FROM topic LEFT JOIN user ON topic.author = user.id 
+    이렇게 원하는 것만 가져와서 조인해서 쓰면된다.
+   
+ 이걸 이제 php로 가져가자
+
+ $sql = SELECT topic.id, 
+          topic.title, 
+          topic.description, 
+          user.name,
+          topic.created
+                            FROM topic LEFT JOIN user ON topic.author = user.id WHERE topic.id = ".$id;    //$id = $_GET['id']; 를말한다
+								              (이까지만하면 모든행이 다나오니깐 WHERE~ 이렇게 쓴다)
+					            (id가 어느테이블인지 명시하기위해 topic.id 이렇게씀)
+
+        그리고 이렇게 조인을했기때문에
+
+	 echo $row['author'];  //이건 쓸수가없다 왜? 조회문에 author를안해서 대신 
+ 	 echo $row['name']; //이걸쓸수있다 다른테이블인대도 조인을해서 쓸수있는것이다!
+
+ 	그리고 보안문제 떔에 꼭 문자는
+
+	htmlspecialchars($row['name']) 이렇게 감싸줘라 !중요!
+
+
+ 자 이렇게해서 관계형 데이터 베이스를 이용해서 데이터를 가져오는걸 해봤습니다 . 
+
+
+----다음은 4장!
+         
+
+
+     

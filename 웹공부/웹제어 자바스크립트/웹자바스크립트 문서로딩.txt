@@ -1,0 +1,18 @@
+문서로딩 
+
+자바스크립트 파일을 바디밑에 놓아야 브라우저가 인식을한다. 근데 헤드에넣어도됨 
+
+  window.addEventListener('load', function(){
+            var t = document.getElementById('target');		이건 모두다 로드된뒤 실행
+            console.log(t);
+        })
+
+ 이렇게넣던가 
+
+     window.addEventListener('DOMContentLoaded', function(){
+                console.log('DOMContentLoaded');		이건 이미지이런거안기달려도됨 
+            })
+
+ 이렇게넣던가 
+
+--------------------

@@ -1,0 +1,145 @@
+데이터베이스
+
+cmd로 접속 
+
+ MySql 서버경로가서 
+
+
+     mysql -u root -p              하면됨 
+
+
+ topic 테이블만들자
+
+ex)
+
+ create table `topic`(
+    -> `id`       int(11) NOT NULL AUTO_INCREMENT,
+    -> `title`    varchar(100) NOT NULL,
+    -> `description` text NOT NULL,
+    -> `author` varchar(30) NOT NULL,
+    -> PRIMARY KEY(id)
+    -> ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+
+  데이터추가
+
+ insert into topic(title,description,author) 
+ values('javaScript','javascript is...computer language for web~','egoing');
+
+ 
+ 데이터 수정,삭제 
+
+
+수정 :  UPDATE topic SET title='npm' WHERE id=3;  
+
+삭제 :  DELETE FROM topic WHERE id=2;
+
+-----------------------------------------------------------------------------
+
+ 자바스크립트로 DB 제어하기
+ 
+ node-mysql                  모듈을 npm으로 설치 
+
+- mysql과 통신하는방법을 자바스크립트와 Nodejs 로만든 클라이언트다.
+
+
+**깃허브에서 설명서 예제보면됨 
+
+  
+var mysql = require('mysql');
+var conn = mysql.createConnection({
+ host     : 'localhost',
+ user     : 'root',
+ password : 'twiceioi',
+ database : 'os'
+});
+
+conn.connect();
+---연결완료--------------------------
+
+var sql = 'SELECT * FROM topic';
+conn.query(sql, function(err, rows, fields){      = 이렇게 쿼리를날림 (콜백) 여기선 두번째인자없지만 보통배열넣어씀  
+  if(err){                                         * rows값에는 행하나가 배열하나로들어옴
+    console.log(err);
+  } else{
+    console.log('rows', rows);
+    console.log('fields', fields);
+  }
+});
+conn.end();                                      =접속끊기
+
+----------------------------------------이게큰틀----
+
+  자바스크립트로 인설트 업데이트 딜리트 해보자 
+
+--------------------- 
+ * 인설트
+
+var sql ='INSERT INTO topic(title,description,author) VALUES(?,?,?);'
+var params = ['Supervisor','watcher','graphittie'];     //???에들어갈 값 배열로 넣음 
+conn.query(sql,params,function(err,rows,fields){        // 쿼리날리고 
+  if(err){                                   
+    console.log(err);
+  }else{
+    console.log(rows);                         //추가되면 rows보여줌
+  }
+});
+
+**** rows를 콘솔창에띄우는데 거기에 여러가지 정보가있다 거기서 
+      필요한 정보를 추출해낼수있다 *****
+
+
+* rows.insertId
+
+이런식으로하면 추가된데이터의 아디값을알아내는것이다.
+
+
+-----------------------------------
+ 
+ * 업데이트
+
+ var sql ='UPDATE topic SET title=?, author=? WHERE id=?';
+ var params = ['FUCk YOU','sejuns',5];                       //5번행업데이트
+
+ 이런식으로쓰면됨 
+
+ * 딜리트
+
+
+ var sql ='DELETE from topic where id=?';
+ var params = [5];                                          //5번행삭제
+
+
+ 이런식으로하면됨
+
+--------------------------------------중간다리완성!!----------------------------------------------
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

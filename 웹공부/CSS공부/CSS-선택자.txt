@@ -1,0 +1,74 @@
+css-시작
+
+표현방식 2가지 
+
+ 1] <h1 style="color:red">helloworld</h1>     = 글자를 붉은색으로 
+						스타일 자체는 html문법이고 그안에 color :red 이건 css임 
+  
+
+ 2]     <style >
+          h2{
+            color:blue
+          }
+        </style>                              = 글자를 푸른색으로 
+
+
+
+
+--선택자---- * 치트시트 참고, * flukeout.github.io :수련사이트
+
+1.태그선택자
+  	li    { color:red; text-decoration : underline;}선언
+	선택자    속성    ; =선언과 선언을 구분자     
+  
+
+2.아이디 선택자(유일해야함)
+      
+	<li id="select">CSS</li>
+	태그에 아디값을주고 
+                 #아디값 {
+                            color:red;
+                          }                   이런식으로하면됨
+
+3.클래스 선택자(다른태그가능)
+
+ 	<li class="select">CSS</li>
+	태그에 클래스값주고 
+                   .클래스값{
+		             color:red; 
+                           }                 이런식으로
+
+4. 부모자식 선택자
+		ol li { 속성 }          = ol태그 밑에 li태그 선택
+		ol>li { 속성 }          = 바로직계자손을 선택 (*color는 상속이라 다적용)
+	        ol,ul { 속성 }          = 동일한계층두개를선택
+                    
+
+5.pseudo class selector(가상 클래스 선택자) 특수? 엘리먼트상태에따라? 선택?
+
+			a:active { 속성 }       = 누르고있으면 변화 
+                        a:hover  { 속성 }       = 올려놓으면 변화 
+			a:visited{ 속성 }       = 방문한곳의 색깔변화--보안상으로 많은속성못쓴다
+                        a:focus  { 속성 }       = 탭키눌렀을때 변화
+			a:link   { 속성 }       = 방문안한곳의 색깔
+	
+			꼭 a태그에 써야하는건아님                        
+			a는 a태그를말하는거임 =  <a href="url주소">방문함</a>  
+
+6.새로운 선택자- 게임으로 수련해보자 
+
+
+                   
+           
+
+   
+		
+
+
+
+
+
+
+
+        
+    

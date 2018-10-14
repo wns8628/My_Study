@@ -1,0 +1,98 @@
+데이터베이스 이용 웹페이지만들기 
+
+1]get('topic/') : view.jade
+
+2]get('topic/:id') : view.jade
+
+3]get('topic/add') : add.jade
+   post('topic/add')
+   redirect('/topic/'+rows.insertId)          --글추가하면이거니깐
+
+4]get('topic/:id/edit') : edit.jade	--글수정
+    post('topic/:id/edit')
+    redirect('topic/'+id)
+
+5]get('topic/:id/delete') : delete.jade   --글삭제 내가한건그냥 view.jade에다가 바로 포스트로보냈음 ㅋ
+    post('topic/:id/delete')
+    redirect('topic/')
+ 
+
+
+ 
+
+ 참고로 view.jade의 반복문안에 topic 이랑 
+
+
+ 밑에 본문 if topic 이랑 다른거임 
+
+ 헷갈리지마라 
+
+
+ 그리고 topic[0] 이걸 쓴이유는
+
+ 자세히봐야하니깐 
+
+ topic은 객체로받는다 즉 
+
+ topic은
+
+ [{"id":6,"title":"hi","description":"hi yo ","author":"hi yo "}]
+
+ topic[0]은
+
+ {"id":6,"title":"hi","description":"hi yo ","author":"hi yo "}
+
+ 
+ 즉 객체안에객체 어쨋든 보면알겠제 
+
+
+ -----------
+
+
+-글수정하기 (글작성과 읽어오기가 하이브리드되야함 가장복잡)
+
+
+ 일단 글수정 버튼이있어야하는데 
+
+ 이걸 특정글안에서만 나타나게 할려면
+
+ 1] 특정글이있을때 = if 
+  
+ 2] 에디트를추가한다  특정글에id값이있으니깐 id/edit으로 가도록
+       
+  * if topic   
+         a(href='/topic/'+topic.id+'/edit') Edit      이런식으로함 
+
+
+--------------------------
+	  p
+           textarea(name='description' placeholder='description')
+            =topic.description
+       이렇게해야 편집본문에 원래글나옴 value=''이거아님 textarea는 
+--------------------
+
+   form(action='/topic/'+topic.id+'/edit' method='post')
+    
+   편집하고 보낼때 이걸씀
+
+
+ 편집하고 어디로보낼때는 
+
+  rows.redirect('/topic/'+id); id를하면됨 거기니깐 
+
+
+
+
+-----------------------
+
+글삭제 
+
+ 버튼을 누른다 
+
+ 지금페이지의 그걸지운다
+
+
+
+
+
+

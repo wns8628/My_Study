@@ -1,0 +1,163 @@
+/*
+1. 중복 도서 제거
+*/
+
+SELECT DISTINCT setNo FROM myshelf WHERE userno = '1' AND isSet = 'Y'
+
+
+
+/*
+2. SET TALBLE 과의 JOIN을 사용하여 데이터를 뽑아 보즈아
+*/
+SELECT B.setName, B.setImage, B.setAmount, B.setRegdate, B.setMakeCom, B.setWriteName FROM
+(
+SELECT DISTINCT setNo FROM myshelf WHERE userno = '1' AND isSet = 'Y'
+) AS A INNER JOIN ebookSet AS B
+ON A.setNo = B.setNo
+
+
+
+/*
+3. SET 도서가 아닌 전자책데이터를 뽑아 보즈아
+*/
+SELECT ebookNo FROM myshelf WHERE userno = '1' AND isSet = 'N'
+
+
+
+/*
+4. SET 도서가 아닌 전자책데이터와 전자책 정보 Join
+책 이름, 책 이미지, 세트 개수, 등록일자, 만든회사, 작가이름
+*/
+
+
+SELECT B.ebookName, B.ebookImage, '0' AS setAmount, B.ebookRegDate, B.ebookMakeCom, B.ebookWriter FROM
+(
+SELECT ebookNo FROM myshelf WHERE userno = '1' AND isSet = 'N'
+) AS A INNER JOIN ebook AS B
+ON A.ebookNo = B.ebookNo
+
+
+
+
+/*
+5-1 일단 합치자
+*/
+
+SELECT * FROM
+(
+SELECT B.setName AS ebookName, B.setImage AS ebookImage, B.setAmount, B.setRegdate AS ebookRegDate, B.setMakeCom AS ebookMakeCom, B.setWriteName AS ebookWriter FROM
+
+(
+SELECT DISTINCT setNo FROM myshelf WHERE userno = '1' AND isSet = 'Y'
+) AS A INNER JOIN ebookSet AS B
+ON A.setNo = B.setNo
+
+
+UNION ALL
+
+
+SELECT B.ebookName, B.ebookImage, '0' AS setAmount, B.ebookRegDate, B.ebookMakeCom, B.ebookWriter FROM
+
+(
+SELECT ebookNo FROM myshelf WHERE userno = '1' AND isSet = 'N'
+) AS A INNER JOIN ebook AS B
+ON A.ebookNo = B.ebookNo
+) AS myBuyInfo
+
+
+
+
+
+/*
+5-2 정렬 해보자
+	가. 등록날자 기준 오름차순, 내림차순
+	나. 회사이름 기준 오름차순, 내림차순
+	다. 작가이름 기준 오름차순, 내림차순
+*/
+
+
+SELECT ebookName, ebookImage, setAmount, ebookRegDate, ebookMakeCom, ebookWriter, ROW_NUMBER() OVER (ORDER BY ebookWriter ASC) AS RowNum
+FROM
+
+(
+
+
+SELECT B.setName AS ebookName, B.setImage AS ebookImage, B.setAmount, B.setRegdate AS ebookRegDate, B.setMakeCom AS ebookMakeCom, B.setWriteName AS ebookWriter FROM
+
+(
+SELECT DISTINCT setNo FROM myshelf WHERE userno = '1' AND isSet = 'Y'
+) AS A INNER JOIN ebookSet AS B
+ON A.setNo = B.setNo
+
+
+UNION ALL
+
+
+SELECT B.ebookName, B.ebookImage, '0' AS setAmount, B.ebookRegDate, B.ebookMakeCom, B.ebookWriter FROM
+(
+SELECT ebookNo FROM myshelf WHERE userno = '1' AND isSet = 'N'
+) AS A INNER JOIN ebook AS B
+ON A.ebookNo = B.ebookNo
+
+
+) AS myBuyInfo
+
+
+/*
+5-3 페이징 해보즈아
+*/
+
+
+SELECT ebookName, ebookImage, setAmount, ebookRegDate, ebookMakeCom, ebookWriter 
+
+FROM
+
+(
+
+
+SELECT ebookName, ebookImage, setAmount, ebookRegDate, ebookMakeCom, ebookWriter, ROW_NUMBER() OVER (ORDER BY ebookWriter ASC) AS RowNum
+FROM
+(
+SELECT B.setName AS ebookName, B.setImage AS ebookImage, B.setAmount, B.setRegdate AS ebookRegDate, B.setMakeCom AS ebookMakeCom, B.setWriteName AS ebookWriter FROM
+(
+SELECT DISTINCT setNo FROM myshelf WHERE userno = '1' AND isSet = 'Y'
+) AS A INNER JOIN ebookSet AS B
+ON A.setNo = B.setNo
+
+
+UNION ALL
+
+
+SELECT B.ebookName, B.ebookImage, '0' AS setAmount, B.ebookRegDate, B.ebookMakeCom, B.ebookWriter FROM
+(
+SELECT ebookNo FROM myshelf WHERE userno = '1' AND isSet = 'N'
+) AS A INNER JOIN ebook AS B
+ON A.ebookNo = B.ebookNo
+
+) AS myBuyInfo
+) AS z WHERE RowNum BETWEEN 1 AND 3
+
+
+
+
+
+
+SELECT ebookName, ebookImage, setAmount, ebookRegDate, ebookMakeCom, ebookWriter 
+FROM
+(
+SELECT ebookName, ebookImage, setAmount, ebookRegDate, ebookMakeCom, ebookWriter, ROW_NUMBER() OVER (ORDER BY ebookWriter ASC) AS RowNum
+FROM
+(
+SELECT B.setName AS ebookName, B.setImage AS ebookImage, B.setAmount, B.setRegdate AS ebookRegDate, B.setMakeCom AS ebookMakeCom, B.setWriteName AS ebookWriter FROM
+(
+SELECT DISTINCT setNo FROM myshelf WHERE userno = '1' AND isSet = 'Y'
+) AS A INNER JOIN ebookSet AS B
+ON A.setNo = B.setNo
+UNION ALL
+SELECT B.ebookName, B.ebookImage, '0' AS setAmount, B.ebookRegDate, B.ebookMakeCom, B.ebookWriter FROM
+(
+SELECT ebookNo FROM myshelf WHERE userno = '1' AND isSet = 'N'
+) AS A INNER JOIN ebook AS B
+ON A.ebookNo = B.ebookNo
+) AS myBuyInfo
+) AS z WHERE RowNum BETWEEN 4 AND 6

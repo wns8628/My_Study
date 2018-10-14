@@ -1,0 +1,312 @@
+* (단어 외울때 그게 동사인지 명사인지 형용사인지 부사인지 
+                                 그뜻을정확하게 알아햐함)
+
+
+  동사 - 동작을나타냄   
+ 
+        1 ] be동사      = 이다, 있다 는 상태 
+ 
+        2 ] 일반동사    = 동작을 나타냄 
+
+
+be동사----------------------------------------    
+     am    = i랑 친구
+     are   = 너,복수 *(a and b are)
+     is    = 3인칭단수
+
+  -의문문  
+     be동사 앞으로 + 물음표
+  
+  -부정문
+     be동사 다음에 not    
+
+  -be동사 의문문 대답 - yes or no 
+
+       답에도 be동사 들어가야함  Are you?   - yes, i am
+                                 is he?     - yes, he is
+                                 is she?    - yes, she is
+ 
+
+일반동사 -----------------------------------
+
+ ** 주어가 3인칭단수일때 동사뒤에 s가 붙는다 **
+
+    주어 = 문장의주인(은,는,이,가) she = 그녀는  
+   3인칭 = 제 삼자 
+    단수 = 혼자
+
+    * they는 3인칭이지만 단수가아님
+      books 도 책들이라서 단수가아님
+
+------
+   come => comes 
+   like => likes
+
+ 예외) 
+  
+ 1] es  
+
+      s,ch,sh 다음에는 es를 붙인다.   pass => passes
+
+ 2] y안녕 ies 
+
+      study => studies    * y앞에 아에이오우 소리면 그냥 s 
+                                 plays, enjoys, says
+
+ 3] 그냥기억해
+
+     have => has
+     go   => goes
+
+
+-------------
+
+ 일반동사 부정문 / 의문문
+
+  Do
+               
+  Does     
+
+(조동사=동사의조수)가 필요하다    * 대신 뒤에는 꼭 ((( 동사원형 )))
+
+--- 
+ 의문문   1] 문장앞에 Do 나 Does     *주어가 3인칭단수일때 = Does
+
+          2] 동사원형 쓴다 
+
+          3] 물음표를 붙인다         
+         
+          * They speak English => Do they speak English?
+              They like cats   => Do they like cats? 
+          
+          * she lives in Seoul => Does she live in Seoul? 
+             he plays soccer   => Does he play soccer?
+
+ 의문문대답
+ 
+         yes, they do ( no, they don't)
+         yes, he does ( no, he doesn't)         
+
+---------------------
+
+  부정문 
+         1] 동사앞에 do not 이나 does no 
+ 
+         2] 동사원형
+
+           
+          * They speak English. => They do not speak English
+ 
+          * he likes chocolate  => he does not like chocolate
+            he plays soccer     => he doesn't play soccer
+
+
+ 7편부터~ 
+
+ 
+-----------------------------------------------------
+
+ be동사 과거형 
+
+ am ,is  =>  was 
+ are     =>  were
+
+ They were sick last night
+
+ 의문문  - be동사 앞으로 + ? 
+
+ she was pretty => was she pretty? 
+
+ 
+ 부정문 - be동사 뒤 not
+ 
+ she was pretty = > she was not pretty
+
+
+대답 
+
+ were you hungry?  
+
+         yes i was 
+          No i wasn't
+ 
+---------------
+
+ 일반동사 과거형 
+
+ 1] 동사원형 + (e)d     
+
+ 2] y => ied                :    try=> tried
+
+ 3] ay ey oy uy => 그냥+ed  :    play => played  
+
+ 4] 단모음+단자음 => 하나더 :    jog => jogged ,  stop => stopped
+
+ 5] 지좆대로 바뀜(불규칙동사)
+
+      break - broke - broken 
+      동.원   과거    과거분사
+
+    * 과거분사(p.p) : 동사가 과거스럽게분장을하고 형용사로 신분을바꾼것
+    * 형용사        : 명사를꾸며주는것 ( a pretty girl) pretty가형용사  
+
+   -- 외우자! -- 
+                                             
+----------------
+ 일반동사 과거 의문문 
+
+ Did (조동사)
+
+ * Did + 동사원형
+
+ 1] 문장앞에 Did
+ 2]  동사원형
+ 3]    ? 
+
+ex)
+    They bought a car  => Did they buy a car?
+    He liked the movie => Did he like the movie? 
+    she met Tim        => Did she meet Tim?
+
+대답
+   Yes, i did 
+    no, i didn't
+
+-----------------
+
+ 일반동사 과거 부정문 
+
+   did not + 동사원형 
+
+ 1] 동사앞에 did not
+ 2] 동사원형
+ 
+    he played soccer   => he did not play soccer
+    i saw Tom          => i did not see Tom
+  
+
+----------------
+
+                의문문 is she  pretty?
+                       was she pretty?
+                       does he live in seoul?
+                       did he live in seoul?
+
+                 부정문 she isn't pretty
+                        she wasn't pretty
+                        he doesn't live in seoul
+                        he didn't live in seoul
+
+
+--------------------------------------------------------------------------------
+  
+ * 미래시제 
+ 
+  will = 조동사
+  
+ 조동사 + 동사원형 
+  
+ i study hard    => i will study hard
+ i learn English => i will learn English
+ i am here       => i will be here
+
+ 의문문 
+
+ will 앞으로 +  ? 
+
+ she will come => will she come?
+
+ 부정문
+
+ will 옆에 not 
+
+ i will not be at work
+
+-----
+
+ he will be in america
+ he will not be in america 
+ will he be in america? 
+
+
+  will == be going to + 동.원
+
+ he is going to in america 
+ he is not going to in america
+ is not he going to in america ? 
+  
+ 
+-----------------------
+
+ 정리 
+
+ 현재 - 현재사실
+        진리 
+        반복동작
+
+ 과거 - 과거사실 
+        역사		yesterday,last night 등 이런걸같이쓴다 
+
+
+ 미래- 미래에일어날일  tonight,tomorrow등같이씀 
+
+ 
+---------------------------------------------------------
+영어시제 12가지 = 현재 과거 미래
+                   4    4    4   =12개이다  
+
+----------------------------------------------------------
+
+현재 진행형
+
+ * be + 동사ing 
+
+  i walk to school  => i am walking to school
+
+
+ 동사 ing 규칙 
+
+-e없애고 ing              make => making
+
+-ie없애고 yng             die  => dying
+
+-단모음 단자음 쌍둥이     swim => swimming
+
+------------------------------------------------
+
+ 조동사 종류 
+ 
+ will         : 의지  ~할것이다 
+(would)
+
+ can          : 가능  ~할수있다
+(could)
+
+ may          : 추측 ~일지도모른다 
+(might)
+
+ should       : 약한의무 ~해야한다
+
+ 
+ must         : 의무   ~꼭 해야한다 
+
+
+  조동사과거 ? 
+
+ i was sick. i could not sleep. 이런식으로씀 
+ 
+---------------------
+
+ 더있지만 일단 기초니깐 이것만숙지해라.
+  
+
+    
+ 
+
+
+
+
+
+  
+ 
+ 

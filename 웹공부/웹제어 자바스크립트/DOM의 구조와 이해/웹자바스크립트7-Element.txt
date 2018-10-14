@@ -1,0 +1,98 @@
+
+* Element 
+
+HTMLElement 의 부모지
+
+Element 의 기능들은 
+
+ 1]식별자 
+ 2] 조회 
+ 3] 속성 
+
+이렇게 3가지로 나눌수있다. API를 알아보자~ 
+
+--------------------------------
+ 1]식별자 
+
+   Element.tagName =태그이름 알아내기 tagName(읽기전용)
+
+ 예) document.getElementById('active').tagName
+     <------------------------------>
+         HTMLLIElement 이고 이건 
+         HTMLElement 를상속받고 이건  
+	 Element 를 상속받고 이건 tagName 이라는 프로퍼티를가짐 그래서 이렇게쓸수있는거임 ~
+
+
+--------   
+
+    Element.id      아디값을가져옴 쓰기가능 
+
+ 예) var active = document.getElementById('active');
+
+     active.id = 'deactive';     아디값을변경한다 deactive로~
+
+--------
+   
+   Element.className = 불편함 쓰지마라. 
+
+   Element.classList = 이거써라 
+   
+ 예) var active = document.getElementById('active');    = 가져오고(유사배열형태)
+ 
+     active.classList.add('클래스값추가');
+     active.classList.remove('클래스값 삭제');
+     active.classList.toggle('없으면생기고 있으면 없앤다.');
+
+ 
+ for(var i=0; i<active.classList.length; i++){
+        console.log(i, active.classList[i]);
+    }
+
+ 유사배열이라 이렇게 뽑아낼수도 있다.        
+ 
+------------------------------
+ 
+ 2] 조회
+ 
+ getElementBy* 
+
+예)   var active = document.getElementById('active'); 
+
+   1. var list = document.getElementsByClassName('marked');  
+   2. var list = active.getElementsByClassName('marked');
+
+      이두개의 차이를 알아라 1번은 전체대상 
+			     2번은 active아디를가진 태그의 하위 태그의 클래스를말함
+
+------------------------------
+
+ 3] 속성
+
+ 태그의 속성알지? attribute
+
+	
+ Element.getAttribute(name)           =name속성의 '값'을가져오는거 
+ Element.setAttribute(name, value)    =name속성의 값을 설정한다.
+ Element.hasAttribute(name);          =name속성이 있는지 조회 있으면 true 아니면 false
+ Element.removeAttribute(name);       =name속성을 지운다. 
+
+
+ 근데 이걸 프로퍼티로 제어도 가능하다 
+
+  target.className = 'important';    =이런식으로 프로퍼티로도할수있다.
+
+ 근데 두개를 미묘한차이가있다.
+ 
+ 근데 프로퍼티는 속성이름과 다른이름을 갖는경우가있다.
+
+ * 속성은 분명 class 인데 프로퍼티는 className 로해야하니깐 
+ 
+ 그리고 실제값이 다를수도있다 .
+
+ 예) href 조회할떄  프로퍼티로하면 전체경로가나옴
+                      속성으로 하면 진짜 그대로적힌대로나옴 ./topic 이런식으로 
+
+--------------------------------------------------------- 
+ 
+
+ 제이쿼리로도 가능함이것들 ㅋ 알지 ? 

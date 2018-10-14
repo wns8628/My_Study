@@ -1,0 +1,47 @@
+ASP .net
+
+마이크로소프트에서 
+c# 언어로 웹개발을 할 수 있도록 만들어진 프레임워크? 
+.net core라는게 나와서 윈도우뿐만아니라 . 리눅스나 맥에서도 돌아감
+
+
+팁 특정사이트 프레임워크알기 builtwith.com 
+
+-개발방식 -
+
+ 1. web form -(yes24는 웹폼으로 개발되었을 것이다.)
+
+   -winform = 윈도우프로그램? 쉽고빠르게 개발할수있도록 
+   버튼을놓고 거기에대한 이벤트를(코드비하인드),코드를쭉나열하는거지 요즘 잘안씀 
+  
+  - 웹페이지 내에 소스코드 존재가능  -> 섞여서 유지보수 어려움
+
+
+   
+ 2. ASP .NET MVC(모델뷰 컨트롤러)
+
+ - View -> HTML CSS Javascript       <-  front end dev
+ 
+ - controller -> 디비통신, 기타계산.     <- back end dev 
+
+ - Model -> User
+
+ 이걸다 분리시켜야지 유지보수가 용이
+   
+ 3. signalR 
+  - 실시간 채팅 서비스 mqtt?
+
+ 4.web API
+  -> 데이터 베이스에서 나온 정보를 XML이나 JSON 형식으로 송출해주는 서비스
+      RESTful API 
+ 
+   Stateless - 단발적이다.  
+   모든플랫폼과 통신이가능하다.(안드로이드 ,ios앱등)
+
+
+-------
+ ASP .NET - System.Net.xxx 이라는 c#구성요소 를 이용해서 웹개발 - 풀닷넷
+
+ 
+
+ 

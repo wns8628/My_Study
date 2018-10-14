@@ -1,0 +1,108 @@
+
+MSSQL 단축키 
+
+MSSQL 
+
+설정
+
+
+
+
+Sql새쿼리 Ctrl+ N 
+
+Sql 실행 Ctrl+E 
+
+텍스트모드 Ctrl+T 
+
+출력모드 Ctrl+D 
+
+카달로그이동창으로 포커스 이동 Ctrl+U 
+
+예상실행계획 Ctrl + L 
+
+실제실행계획 Ctrl+M 
+
+실행통계표시 Ctrl+Alt+S 
+
+ 
+
+   
+
+--쿼리 실행,취소,분석 
+
+Ctrl + E 또는 F5 선택 쿼리 실행 - 선택이 없다면 전체 실행 
+
+Alt + Break : 실행 취소 
+
+Ctrl + F5 : 쿼리 구문 분석 
+
+   
+
+--템플릿 
+
+Ctrl + Shift + Insert : 템플릿 삽입 
+
+Ctrl + Shift + M : 템플릿 매개 변수 변경 
+
+   
+
+-- 튜닝 
+
+Ctrl + L : 예상 실행 계획 표시 
+
+Ctrl + I  : 인덱스 튜닝 마법사 
+
+   
+
+--DB 연결 
+
+Ctrl + O : MSSQL 서비스 연결 
+
+Ctrl + U : DB 바꾸기 
+
+   
+
+-- 탐색 
+
+F8  개체브라우저 표시 
+
+   
+
+-- 창 
+
+Ctrl + B  : 결과창 크기 변경 
+
+Ctrl + W : 결과창 크기 변경 
+
+   
+
+-- 결과 보기 
+
+Ctrl + T 결과를 텍스트로 
+
+Ctrl + D 결과를 표 형태로 
+
+   
+
+--주석 
+
+Ctrl + Shift + C : 선택 영역 주석 처리 
+
+Ctrl + Shift + R : 주석 해제 
+
+   
+
+--변환 
+
+Ctrl + Shift + U : 대문자로 변환 
+
+Ctrl + Shift + L : 소문자로 변환 
+
+   
+
+ -- 편집 
+
+Ctrl + H : 바꾸기 
+
+
+출처: http://doublegintonic.tistory.com/4 [.]

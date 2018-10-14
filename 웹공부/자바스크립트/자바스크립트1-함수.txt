@@ -1,0 +1,77 @@
+함수 - 재사용성,가독성,유지보수성 up
+
+function 으로시작
+
+* 함수정의
+
+	function 함수명( [인자...[,인자]] ){
+  	 코드
+   	return 반환값
+       }
+
+*쓸때 
+
+      함수명(); 
+
+
+* 함수 출력 
+
+  return ~ ;  을쓴다 return나오고 반환한뒤 함수가종료된다 
+
+ex)
+
+ function get_member1(){
+    return 'egoing';
+	}
+
+*함수 입력 
+
+ 함수명()  :괄호안에 무언가를넣어준다.(매개변수:Parameter)
+
+
+ex)
+	function get_argument(arg){
+    				    return arg;
+				}
+
+ 
+
+	alert(get_argument(1));        이런식으로쓴다
+                           ㄴ인자:argument
+
+   
+ 복수인자--
+
+	function get_arguments(arg1, arg2){
+   					 return arg1 + arg2
+					   }
+ 
+alert(get_arguments(10, 20));
+alert(get_arguments(20, 30));
+
+
+이런식으로씀 
+
+*리턴값은 하나만가질수있다는 한계*
+
+
+
+함수정의 다른방법 
+
+var numbering = function (){   }    : 이런식으로 정의 대입연산자를이용 (var는생략가능)
+
+익명함수 
+
+  (numbering = function (){   })()   :이런식으로 씀 정의를한뒤 바로쓴다. 정의와호출을같이씀 
+				     : 일회성,이름이없고 바로실행할떄쓴다 
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,87 @@
+*flex  :  레이아웃을잡기위한 기능 
+
+      <container>
+ 		<item></item>
+ 		<item></item>
+      </container>                    -이런태그가있다는게 아니라 이런역할을하는게있다는거임 
+				      -컨테이너 전용 속성 아이템 전용속성이있다!
+
+
+      - 컨테이너에 속성
+
+	     display:flex;를 하는 것부터 시작 
+
+	     ex)
+		flex-direction : column-reverse; =열반대
+		flex-direction : row-reverse;    =행반대         컨테이너에주는거임(부모)
+
+
+
+	        align-items : 수직 관련 정렬			           * body{
+        	    								   display: flex;
+               									   align-items: center;
+          									 }            이런식으로쓴다
+
+	        justify-items : 수평 관련 정렬 
+
+
+        	align-content : 아이템을 그룹핑해서정렬
+	
+       
+
+
+
+      - 아이템속성 3가지 
+	
+	flex-basis     = 엘리먼트의 방향에 해당되는 엘리먼트의 크기를 지정 (여백이작아지면 고통분담)
+        
+        flex-grow: 1;  = 기본이(0) 컨테이너안에 아이템들이 컨테이너 크기를 1/n 해서 여백을다채운다.
+			   *하나만주고 싶으면 하나만해서 주면됨 그면 거기에맞게변화함 중요한건 여백을다채운다는것
+
+	flex-shrink   = 값에따라서 고통분담을한다 0을주면 이기적이게됨 .. (이해안되면 찾아봐요 ~)
+				*엘리먼트가 어떤값(basis같은) 크기를가지고있을때 동작
+				 화면이 작아질 때 줄어드는 비율 결정, 
+        flex-wrap : 아이템 크기가 컨테이너 크기보다 크다면 줄바꿈
+	
+        align-self : 특정 아이템만 크기 다르게 
+
+        flex : flex-grow + shrink + basis, 
+
+	order : 아이템의 순서 바꿈.(검색엔진최적화를위해 구지뭐..)
+	
+    
+
+
+
+  - Holy Grail Layout  =성배
+
+	 궁극의 레이아웃이다 메인크기만바뀌게 이게말이참어려워 .
+
+	- holy grail layout : 이런 형태의 레이아웃을 flex를 통해 쉽게 만들 수 있음
+
+	<header>
+ 	<section>            - <nav>,<main>,<aside> 수평 정렬
+	<footer>
+	수직 정렬 
+
+	
+
+   
+
+	
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+ 
+	          
+          

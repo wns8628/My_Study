@@ -1,0 +1,185 @@
+
+ 이벤트 
+
+----------
+
+ event target            = 이벤트가 발생하는 대상 (버튼 등등)
+
+ onclick,onchange..      = 이벤트타입 (클릭했을때,텍스트필드내용이바꼇을떄~ 등등)
+
+ event handler           = 이벤트가발생했을때 실행할 코드(경고창을띄워라 등등)
+
+---------
+  등록방법
+
+이벤트 프로그래밍을 하기 위해서는 이벤트의 대상에 이벤트 핸들러를 등록해줘야 한다.
+웹브라우저에서는 크게 3가지 종류의 등록방법을 제공하는데 하위 토픽에서 자세한 내용을 알아보겠다.
+
+-------인라인방법---------------------------------
+
+ <!--자기 자신을 참조하는 불편한 방법-->
+ <input type="button" id="target" onclick="alert('Hello world, '+document.getElementById('target').value);" value="button" />
+ <!--this를 통해서 간편하게 참조할 수 있다-->
+ <input type="button" onclick="alert('Hello world, '+this.value);" value="button" />
+ 
+ 인라인 방식은 태그에 이벤트가 포함되기 때문에 이벤트의 소재를 파악하는 것이 편리하다.
+ 하지만 정보인 HTML과 제어인 JavaScript가 혼재된 형태이기 때문에 바람직한 방법이라고 할수는 없다. 
+
+-------프로퍼티 리스너 방법--------------------------
+
+
+
+    var t = document.getElementById('target');
+
+    t.onclick = function(event){                        인자를넘겨줌 저 event 객체는 정보를가지고있다 이걸이용하는거지 
+        alert('Hello world, '+event.target.value)
+    }
+   
+    이건근데 두개를등록해도 뒤에것하나만실행됨                                                            
+
+   
+     * ie8 이하 버전에서는 이벤트 객체를 핸들러의 인자가 아니라 전역객체의 event 프로퍼티로 제공한다. 
+       또한 target 프로퍼티도 지원하지 않는다.
+
+
+
+-------------addEventListener() 방법----------------추천! 
+
+ 
+    var t = document.getElementById('target');
+ 
+    t.addEventListener('click', function(event){
+        alert('Hello world, '+event.target.value);
+    });
+
+   *  이 방식은 ie8이하에서는 호환되지 않는다. ie에서는 attachEvent 메소드를 사용해야 한다
+
+1] 중요한 장점은 하나의 이벤트 대상에 복수의 동일 이벤트 타입 리스너를 등록할 수 있다는 점이다
+
+2] 이벤트 객체를 이용하면 복수의 엘리먼트에 하나의 리스너를 등록해서 재사용할 수 있다. 
+
+    var t1 = document.getElementById('target1');
+    var t2 = document.getElementById('target2');
+
+    function btn_listener(event){
+        switch(event.target.id){
+            case 'target1':
+                alert(1);
+                break;
+            case 'target2':
+                alert(2);
+                break;
+        }
+    }
+
+    t1.addEventListener('click', btn_listener);
+    t2.addEventListener('click', btn_listener);
+
+
+
+-----------------------------------------------------------------
+
+*****기본동작취소 *****
+
+ 웹브라우저의 구성요소들은 각각 기본적인 동작 방법을 가지고 있다.
+
+  텍스트 필드에 포커스를 준 상태에서 키보드를 입력하면 텍스트가 입력된다.
+  폼에서 submit 버튼을 누르면 데이터가 전송된다.
+  a 태그를 클릭하면 href 속성의 URL로 이동한다.
+
+ 이런걸 취소할수있다 중요한거지. 아니요누르면 동작안하게하는거니깐.
+---
+ 인라인방식 
+   <a href="~~" onclick="if(document.getElementById('prevent').checked) return false;">opentutorials</a>
+------------
+ add리스너방식 
+ 
+      document.querySelector('a').addEventListener('click', function(event){
+                if(document.getElementById('prevent').checked)
+                    event.preventDefault();
+            });
+
+
+  *ie9 이하 버전에서는 event.preventDefault();대신 
+                       event.returnValue를 false로 해야 한다. 
+
+
+
+
+
+
+-----------------------------------------------------------------
+
+* 이벤트타입 *
+ 
+ 이벤트 타입이라는 것은 이벤트의 종류라고 할 수 있다.
+
+ 
+ 1] 폼 에관련된 이벤트타입
+
+  1. submit 타입
+
+     아무것도입력안되면 전송안되게 기본동작취소도 알아야함 
+
+      var form = document.getElementById('add_des');
+
+     form.addEventListener('submit', function(event){
+        if(document.getElementById('add_title').value.length === 0){        =>값이 0이면 즉 아무것도없으면
+          alert('제목을 입력하세요.');
+          event.preventDefault();                                           =>이게 기본동작취소임
+        }
+     })
+
+
+  2.change
+
+   change는 폼 컨트롤의 값이 변경 되었을 때 발생하는 이벤트다.
+
+   input(text,radio,checkbox), textarea, select 태그에 적용된다.
+   
+    <p id="result"></p>
+
+   <input id="target" type="name" />
+
+   var t = document.getElementById('target');
+   
+   t.addEventListener('change', function(event){
+     document.getElementById('result').innerHTML=event.target.value;
+  });
+
+ 3.blur, focus
+
+   focus는 엘리먼트에 포커스가 생겼을 때, blur은 포커스가 사라졌을 때 발생하는 이벤트다. 
+
+   다음 태그를 제외한 모든 태그에서 발생한다.
+   <base>, <bdo>, <br>, <head>, <html>, <iframe>, <meta>, <param>, <script>, <style>, <title>
+
+   <input id="target" type="name" />
+
+   <script>
+     
+    var t = document.getElementById('target');
+    t.addEventListener('blur', function(event){
+        alert('blur');  
+    });
+
+    t.addEventListener('focus', function(event){
+        alert('focus'); 
+    });
+
+  </script>
+
+
+---------------------------------------
+ 
+ 마우스이벤트 --안봄
+
+
+---------------------------------------
+ 이벤트전파 (버블링,캡쳐링) 아직안봄 
+
+
+---------------------------------------------------------------
+
+
+

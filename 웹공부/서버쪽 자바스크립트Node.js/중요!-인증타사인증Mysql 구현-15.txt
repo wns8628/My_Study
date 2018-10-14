@@ -1,0 +1,79 @@
+인증 Mysql 
+
+1] mysql 가서 
+
+2] 데이터베이스 선택하고 
+
+3] users =>회원담는 테이블을 만든다 
+  	   id , authId ,username ,password ,salt ,displayName ,email
+								* authId 어떤방식으로 인증했는지 그리고 식별하기위한 정보
+
+
+ 씨발 테이블 맨뒤에 **** ENGINE=InnoDB DEFAULT CHARSET=utf8; **** 이거붙어야 오류안뜨고잘됨 ㅡㅡ ;; 꼭붙여라 
+			 ENGINE=InnoDB DEFAULT CHARSET=utf8;
+			 ENGINE=InnoDB DEFAULT CHARSET=utf8; 씨발!!!!!!!!!!!!!!!!!!!!!!!!
+
+ users 테이블만들떄 이거 꼭붙여 진짜 꼭붙여라 !!!!!!!!!!!
+
+---------
+
+1] 일단 mysql 로 세션을 등록하기위해서  모듈등록한다. 
+
+2] 그러면 데이터베이스에 세션 테이블이 만들어지고 거기다 사용자를 식별할수있는 세션이등록됨
+	(홈피접속하면 세션이 디비에 저장됨.)
+
+
+3] 사용자 추가 (회원가입)
+
+   1.mysql 모듈추가 (세션mysql과는 다른거임)
+
+   2. 회원가입정보는 post 방식으로 /auth/register 이리로 전송 
+
+   3. user.push(파일로할때썻지?) 대신에 
+ 
+  var sql = 'INSERT INTO users SET ?';                 => ?는 
+    conn.query(sql,user,function(err,results){         =>여기서 2번째인자값임     *user는 가입할때받은정보를 저장한객체임
+      if(err){
+        console.log(err);
+        res.status(500);
+      } else{
+        res.redirect('/welcome');                      => 추가성공했을시 여기로
+      }
+    });
+  
+
+
+4] 로그인 
+
+    1. 로그인 페이지에서 입력하고 전송눌렀을때 post 방식으로 /auth/login 이리로가겠지
+    2. 가봤는데? 패스포트모듈을 썻네? local방식으로?!
+    
+    3. passport.use(new LocalStrategy(   그러면 다음으로 여길찾아가야지  여기서 아디비번검사를한다.
+  
+    4. 그다음은 시리얼라이즈로 간다. 여기서 세션으로? 식별자를 박는다 authId 를박으면되겠지
+            
+    5. 한번박히면 다음부터는 디시리얼라이즈가 실행됨.. 식별자로만 비교해서 있으면 로그인된상태?유지?
+    
+
+---------------------------------------------------------------------------------------------------------------
+
+ 타사인증 mysql 
+
+ 1] 페이스북 링크클릭시   '/auth/facebook' 일로가잔아
+
+	1.'/auth/facebook/callback', 페북에서 다시 우리앱으로 정보를 보내줌 일로 다시온다.
+
+
+ 2] 그정보를가지고 passport.use(new FacebookStrategy(  일로가서 콜백을실행시키겠지.
+
+	1.콜백 인자에서  profile 이걸잘써야한다. 여기서 사용자있는지,없으면 추가시킨다.
+        
+ 3] 시리얼라이즈유저로 간다 ~ 세션박아넣는다 한번만실행~
+
+ 4] 다음부터는 디시리얼라이즈로 검사한다.~ 
+
+
+
+ 
+
+ 

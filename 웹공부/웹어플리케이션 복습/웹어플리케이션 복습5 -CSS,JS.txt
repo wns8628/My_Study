@@ -1,0 +1,109 @@
+5장 
+
+css로 좀 이쁘게해볼까요? 
+
+
+* 글고 꾸밀때 크롬브라우저 개발자도구를 이용하면 아주 유용
+
+
+일단 헤드태그에 css 넣기 <style>태그 쓰면됨
+
+
+<style>
+      header {
+        border-bottom: 1px solid grey;
+        padding-left: 30px;
+      }
+      body {
+        margin: 0;
+      }
+
+      nav {
+        border-right: 1px solid grey;
+        width: 200px;
+        height: 700px;
+        float:left;
+      }
+
+      nav ol{
+        margin: 0;
+        padding: 20px;
+        list-style: none;
+      }
+      #content{
+          float: left;
+          width: 500px;
+          padding-left: 20px;
+      }
+ </style>
+
+알겠지?
+
+6장---------------------------
+
+자이제 js로 버튼을만들어보자
+
+근데 버튼을 본문이랑때는데 같이묶고싶다 그면 div로 묶고 id값으로 content를 주면되겠지? 
+
+자이제 배경변화도록해보자
+
+body 태그에 class = "black" 주고
+
+css에서 body.black{                //바디태그의 클래스값이 black인 태그를 바꾼다!
+	  background-color:black;
+	  color:white;
+		}
+
+이걸로 바디태그의 class가 없으면 원상태 black면 화면검은색 이런원리로 할수있다.! 
+
+이걸하기위해 필요한것 
+
+1. 이벤트 (버튼을 클릭했을때 사건이일어나라! ) onclick=" "  <<이건 html인데 속성에 자바스크립트로온다  
+2. 자바스크립트를 이용해서 클래스값을 바꾸자
+
+ex)   <input type="button" name="name" value="White"  onclick="alert(1)">
+  
+(이런식으로씀 White 라는 버튼을 누르면 1이라는 경고창이뜬다 ! )
+
+
+1] js는 document.getElementById('body')
+
+이러면 가져온다 태그를 byid 를 이용해서 =아디값은 body 
+
+이함수를 쓰면 아디값이 body 인 태그를 제어할수있는 어떤값을 리턴해서 
+
+이걸 e 라는 변수에 담으면 e로 제어할수있다 이런뜻임
+
+그래서 일단 body태그에 id값을 body로 주자 
+
+  <body id="body" class="black"> 그면 이렇게되겠지
+
+ 그리고 e.className = "white" 으로하면  바디태그의 클래스네임이 바뀐다.. <<html 설명서에 나와있다
+
+
+
+1.이벤트 
+
+2.특정한태그를 선택하는 방법 
+
+3.선택한태그의 클래스값을 변경하는방법 
+
+이걸배운거임
+
+써먹어보면 
+
+  <input type="button" name="name" value="White"  onclick="document.getElementById('body').className=''">
+  					                아디값이 body인 태그의 클래스네임을 지운다 이런뜻 =속성은 자바스크립트임
+
+  <input type="button" name="name" value="black"  onclick="document.getElementById('body').className='black'">
+
+이렇게 하면되겠지?
+
+자바스크립트의 역할 을 잘알아가자 =상황적인 변화에따라 웹페이지코드를 변경할수있다 = 자바스크립트를 사용하는 이유
+
+
+
+
+ 
+
+

@@ -1,0 +1,34 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    link(rel='stylesheet' href='/style.css')
+    script(src='/jquery.js')
+  body
+    h1
+     a(href='/topic') Server Side JavaScript
+    div(id='list')
+      ul
+        each topic in topics
+          li
+            a(href='/topic/'+topic.id)= topic.title
+    artcle(id='art')
+      if topic
+        h2= topic.title
+        = topic.description
+        div= 'by '+topic.author
+        br
+        a(href='/topic/'+topic.id+'/edit') 수정
+        br
+        form(action='/topic/'+topic.id+'/delete' method='post')
+          p
+            input(type='submit' value='삭제')
+      else
+        h2 Welcome~
+        | This is sever side~~~~~
+
+
+    ul
+     li
+      a(href='/topic/add') 글쓰기
+    script(src='/script.js')

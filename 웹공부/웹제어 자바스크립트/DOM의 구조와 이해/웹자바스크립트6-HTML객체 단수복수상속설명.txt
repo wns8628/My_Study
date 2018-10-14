@@ -1,0 +1,50 @@
+리턴된객체의 이름은무엇인가? 
+ 
+ * HTMLElement
+
+ -document.getElementById          : 리턴 데이터 타입(리턴값,리턴된객체)은  => HTMLELement   (단수)
+
+ 
+  li태그 를리턴받으면      - HTMLLIElement 객체의이름은 이것이다
+ 
+  a 태그 를 리턴받으면     - HTMLAnchroElement 
+
+  input 태그를 리턴받으면  - HTMLInputElement
+
+이를 통해서 알 수 있는 것은 엘리먼트의 종류에 따라서 리턴되는 객체가 조금씩 다르다는 것이다.
+
+
+ -그객체의 프로퍼티 즉 기능도 다르겠지 하지만
+
+  부모는  HTMLELement 상속받은자식이   HTMLLIElement
+				       HTMLAnchroElement
+	                               HTMLInputElement
+
+                                        이런것들 이라는것이다.
+
+   부모의 기능을물려받고 거기다 각자의 특성에맞게 기능이추가된것임 
+
+----------------------------------------------------------------------------------------------
+
+ * HTMLCollection
+ 
+ document.getElementsByTagName    : 리턴 데이터 타입(리턴값,리턴된객체)은 => HTMLCollection (복수)
+
+                                    유사배열을 리턴하고 목록이 실시간 갱신이된다.그래서 조회를다시할 필요가없다.
+
+
+
+
+
+-----------------------------------------------------------------------------------
+
+console.group('before');
+  중간에 console.log      
+console.groupEnd();
+  
+                         이렇게하면 그룹핑을 시켜서 시각적으로 어디속해있는지 보기가 좋다.
+
+ 
+
+
+

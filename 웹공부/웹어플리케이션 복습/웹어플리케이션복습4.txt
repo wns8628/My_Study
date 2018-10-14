@@ -1,0 +1,75 @@
+정리 4장 
+
+이제좀 html로 꾸며볼까요?
+
+<?php
+$conn = mysqli_connect('localhost','root','twiceioi');
+mysqli_select_db($conn,'wnstest');
+?>
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <header>
+      <h1>생활코딩 JavaScript</h1>
+    </header>
+
+    <nav>
+      <ol>
+        <?php
+        $sql = "SELECT * FROM `topic`";
+        $result = mysqli_query($conn,$sql);
+
+        while($row = mysqli_fetch_assoc($result)){
+          echo '<li><a href="index.php?id='.$row['id'].'">'.htmlspecialchars($row['title']).'</li></a>';
+        }
+        ?>
+      </ol>
+    </nav>
+    <article>
+<?php
+      $id = mysqli_real_escape_string($conn,$_GET['id']);         /보안상떄문에 이렇게함
+      $sql = "SELECT topic.id, topic.title, topic.description,
+      user.name, topic.created  FROM topic LEFT JOIN user ON topic.author = user.id WHERE topic.id= ".$id;
+      //원하는것만 추려서 조인해서 가져옴
+         $result = mysqli_query($conn,$sql);
+         $row = mysqli_fetch_assoc($result);
+  ?>
+              <h2><?=htmlspecialchars($row['title'])?></h2>
+              <div><?=htmlspecialchars($row['created'])?> | <?=htmlspecialchars($row['name'])?></div>
+              <div><?=htmlspecialchars($row['description'])?></div>
+    </article>
+
+  </body>
+</html>
+
+
+
+코드보면알죠 ?모르면 정리4편 다시봐요~
+
+참고로
+
+ <h2><?php echo htmlspecialchars($row['title']);?></h2> 
+
+ <h2><?=htmlspecialchars($row['title'])?></h2>
+
+같은거임 밑에 것이 더편하게 가능해서 하는거임
+
+$id = mysqli_real_escape_string($conn,$_GET['id']);  브라우저 주소창에 id는 외부 공격할수있기때문에 이렇게 안전하게 보안을하는것임 
+               (이함수)쓰고  (&conn ,이걸넣어야함) 
+
+
+---그리고 디비의 내용(description)을 좀바꾸자 너무짧으니 
+
+ UPDATE wnstest SET description = '블라블라~~~' WHERE id = 2 ;  뭐이런식으로바꾸면됨 
+ 
+
+
+
+
+
+

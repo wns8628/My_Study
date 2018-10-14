@@ -1,0 +1,9 @@
+[DEFAULT]
+BASEURL=https://developers.google.com/webmasters/state-of-the-web/2005/elements
+[{000214A0-0000-0000-C000-000000000046}]
+Prop3=19,11
+[InternetShortcut]
+IDList=
+URL=https://developers.google.com/webmasters/state-of-the-web/2005/elements
+IconFile=https://developers.google.com/_static/64fbe09b00/images/favicon.png
+IconIndex=1

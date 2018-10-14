@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    link(rel='stylesheet' href='/style.css')
+    script(src='/jquery.js')
+  body
+    h1
+     a(href='/topic') Server Side JavaScript
+    div(id='list')
+      ul
+        each topic in topics
+          li
+            a(href='/topic/'+topic)= topic
+    artcle(id='art')
+      h2= title
+      p= description
+
+
+      div(id='write')
+        a(href='/topic/new') 글쓰기
+    script(src='/script.js')

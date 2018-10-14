@@ -1,0 +1,34 @@
+Text 객체
+
+ 말그대로 텍스트임 
+ 태그안에있는거
+
+
+ 텍스트 노드를 찾는 예제다. 주목할 것은 DOM에서는 공백이나 줄바꿈도 텍스트 노드라는 점이다.
+
+  console.log(t2.nextSibling.firstChild.nodeValue);
+
+
+값-----------------------------------
+
+텍스트 노드의 값을 가져오는 API
+  data
+  nodeValue
+
+ var t = document.getElementById('target').firstChild;  =  텍스트객체를 찝어서 t에넣음 
+    console.log(t.nodeValue);                           =  텍스트객체의메소드를사용해서 값을읽기 
+    console.log(t.data);			        =  같은효과임 
+
+ t.nodevalue= "바꿀내용"               =이렇게 쓰기도가능
+
+-------------------------------
+
+조작
+t.appendData(data.value)			  = 뒤에 덧붙여
+  deleteData(start.value, end.value)	          = 첫번쨰값과 두번째값까지 지워
+  insertData(start.value, data.value)             = 첫번째값인덱스뒤에 끼워넣어 
+  replaceData(start.value, end.value, data.value) = 첫번째값과 두번째값 사이의값을 3번째 인자값으로바꿔라
+  subStringData(start.value, end.value)           = 첫번째값과 두번째값 데이터읽어오는거 ? 
+
+생성
+ docuemnt.createTextNode()

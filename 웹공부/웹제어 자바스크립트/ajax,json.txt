@@ -1,0 +1,66 @@
+* Ajax
+
+ Ajax는 웹브라우저와 웹서버가 내부적으로 데이터 통신을 하게 된다. 
+ 그리고 변경된 결과를 웹페이지에 프로그래밍적으로 반영함으로써 웹페이지의 로딩 없이 서비스를 사용할 수 있게 한다. 
+
+ 사용하는 API가 XMLHttpRequest이다.
+ 그렇다고 꼭 XML을 사용해서 통신해야 하는 것은 아니다. 사실 XML 보다는 JSON을 더 많이 사용한다.
+
+document.querySelector('input').addEventListener('click', function(event){
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', './time.php');
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4 && xhr.status === 200){                     = 4번은 준비완료 ,200번은 아무문제없음 일때
+            document.querySelector('#time').innerHTML = xhr.responseText;   = 이걸실행
+        }
+    }
+    xhr.send(); 
+}); 
+
+--
+document.querySelector('input').addEventListener('click', function(event){
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', './time2.php');
+    xhr.onreadystatechange = function(){
+        document.querySelector('#time').innerHTML = xhr.responseText;
+    }
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    var data = '';
+    data += 'timezone='+document.getElementById('timezone').value;
+    data += '&format='+document.getElementById('format').value;
+    xhr.send(data); 
+});
+
+ 뭐이런식으로 쓴다.. 
+
+--------------------------------------------
+
+ * JSON 
+ 
+  JSON이 XML을 대체해서 설정의 저장이나 데이터를 전송등에 많이 사용된다.
+  JavaScript에서 객체를 만들 때 사용하는 표현식을 의미한다. 
+
+  즉 배열은 배열그대로전송 객체는객체그대로전송
+
+ { " " : " " , " " : " " }  제이슨의형태임 
+
+ 자바스크립트에는 json이라는객체가 있다 
+
+ json의 주요한 메소드 1] json.parse('문자인자')         = 문자(인자)를 객체로 만들어준다. 
+		      2] json.stringify('객체인자')     = 인자객체를 제이슨포맷에 맞는 text로 만들어줌  
+
+
+ JSON의 진가는 서버와 통신을 할 때 드러난다.
+
+PHP의 배열을 클라이언트로 전송하기 위해서 콤마로 구분된 문자열을 만들었다. 
+자바스크립트에서는 이를 받아서 콤마를 구분자로 다시 배열로 만들었다. 
+
+만약 PHP의 배열을 그대로 자바스크립트에서 사용할 수 있다면? 
+반대로 자바스크립트의 배열을 그대로 PHP에서 사용할 수 있다면 얼마나 편리할까? 이 때 사용하는 것이 JSON이다. 
+
+
+ 근데 데이터타입 다지원안함 자바스크립트의 부분집합? 만지원함 
+
+ 
+
+

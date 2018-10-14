@@ -1,0 +1,71 @@
+
+ 따로 할것= 1월~ 12월, 서수. 행성..
+
+
+ 숫자읽기 
+
+ 1,000,000,000  => one billion
+ 5,234,000      => five million,two hundred, thirty-four thousand
+
+ 빌리언 밀리언 싸우전드 끊어읽으면됨 * s안붙인다!
+
+ 
+
+ 기수 = 기본숫자 
+
+ one.. two.. three .. 
+
+ 
+ 010-1223-4567
+
+  22 = double two 라고도많이씀
+
+-------------------------------------------------
+
+
+ 서수 = 서열을나타냄
+
+   first 
+   second 
+   third
+   fourth
+   fifth
+   sixth
+   ~~ 
+
+--------------------------
+
+ january is the first month of the year.
+
+ Amy has three books. 
+
+---------------------------------------------------
+
+ 평서문 일떄는 
+
+ 주어 + 동사 순서임
+ 
+--------------------------
+ there = 거기에 라는부사
+
+ i'll go there
+--------------
+ There is/are  => ~가 있다.  (거기에 아님)
+
+
+ There is a book on the desk
+
+ 주어가어딨지? 
+
+ 주어 + be동사 + 주어 = there is a home  = 집이있다.
+
+is there a book?     의문문 
+
+There is not a book. 부정문 
+
+
+
+
+
+
+

@@ -1,0 +1,37 @@
+Document 객체 
+
+ 문서의 시작점이라고 볼수있다. (규격,인터페이스)
+
+  Document 를 직접쓰지않고 웹에서는 자식인
+
+   HTMLDocument 를사용한다.
+
+----------
+ document 객체의 자식으로는 Doctype과 html이 있다. 
+
+ document  객체의 주요 임무는 새로운 노드를 생성해주는 역할이다.  
+ 이에 대한 내용은 노드 변경 API에서 학습했기 때문에 여기서는 언급하지 않는다.
+
+----------------
+
+주요 API
+
+ 노드 생성 API
+
+ document.createElement('li')
+          createTextNode()      이런식으로씀 
+ 
+ 
+ 이걸해서 노드로 제어하잔아 앞에서 했지 ? 
+
+-----
+문서 정보 API
+ 
+  document.title           =  이문서의 제목? 
+  	   URL             =  이문서의 url
+           referrer        = 어떠한사이트를경유해서 이페이지에 도착했는지 
+           lastModified
+
+
+
+ 훨씬많은 api가있겠지 

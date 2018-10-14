@@ -1,0 +1,32 @@
+미디어쿼리
+
+반응형웹 이나옴에따라 장치에따라 다르게보이게하는것 
+
+ex)
+
+ @media(max-width:500px){
+            body{
+                background-color: red;
+            }                                    이런식으로씀
+
+
+ 500px까지 바디태그의 백그라운드 컬러를 빨간색으로한다. 뭐이런얘기임
+
+
+ 응용 ex)
+
+    @media(max-width:500px){
+            .content{
+                flex-direction: column;
+            }
+            .content nav, .content aside{
+            border:none;
+            }
+            nav,aside{
+                flex-basis: auto
+            }
+         
+        } 
+
+  뭐 이럭식으로 해서 모바일환경에서는 어떻게~ 이런걸 정의한다.
+

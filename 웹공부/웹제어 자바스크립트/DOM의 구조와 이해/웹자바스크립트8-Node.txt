@@ -1,0 +1,141 @@
+
+ Node 노드 
+
+----------------
+관계
+
+엘리먼트는 서로 부모, 자식, 혹은 형제자매 관계로 연결되어 있다. 즉,모든구성요소가 노드임!!공백이나 띄어쓰기도..
+각각의 Node가 다른 Node와 연결된 정보를 보여주는 API를 통해서 문서를 프로그래밍적으로 탐색할 수 있다.
+
+ Node.childNodes      ________자식노드들을 유사배열에 담아서 리턴한다.
+ Node.firstChild      ________첫번째 자식노드(띄어쓰기나 공백도포함한다..)
+ Node.lastChild       ________마지막 자식노드 
+ Node.nextSibling     ________다음 형제 노드
+ Node.previousSibling ________이전 형제 노드
+ Node.contains()
+ Node.hasChildNodes()         등등몇개더있따~
+
+*
+ firstElementChild,
+ lastElementChild,
+ nextElementSibling,
+ previousElementSibling.. 등은 텍스트 노드 건너뛴다~  
+*
+
+-------------------
+노드의 종류
+
+Node 객체는 모든 구성요소를 대표하는 객체이기 때문에 각각의 구성요소가 어떤 카테고리에 속하는 것인지를 알려주는 식별자를 제공한다. 
+
+ Node.nodeType        =내가지정한노드타입이 뭔지 알아내는거 1번부터~많다~
+ Node.nodeName        =내가지정한노드가 어떤태그인지 텍스트인지? 알아내는거
+
+--------------------
+ 노드 추가 
+ 
+var li   = document.createElement('li')          = 텍스트 엘리먼트를 만든다 . 노드api가아닌 도큐먼트api를써서만든다.  (문서가 엘리먼트를만드니)
+var text = document.createTextNode('블라블라')   = 텍스트노드를만든다. 
+
+ li.appendChild(text)                            =태그와 텍스트를결합! 
+
+ target.appendChile(li)                          = 결합된걸 타겟이라는태그밑에 붙인다! 끝에! 
+
+ target.insertBefore(li, target.firstChild);     = 결합된걸 target.firstChild 앞쪽에 붙인다! 
+-------------------
+ 노드삭제 
+
+ 삭제는 좀 좆같다 부모를알아내서 부모의 자식을지우는것으로 삭제를해야함 
+
+ 예)타겟을 지우고 싶다 
+
+        var target = document.getElementById('target');
+        target.parentNode.removeChild(target);
+
+            타겟의 부모노드를실행해서 거기서 removeChile(target); 을해서 target을 지운다 .
+
+------------------
+
+ 노드 변경 
+       var target = document.getElementById('target');                        = 타겟태그가져오고
+
+       var a = document.createElement('a');                                   = a태그노드만들고
+     
+        a.setAttribute('href', 'http://opentutorials.org/module/904/6701');   = 거기에 속성값넣어주고 
+        a.appendChild(document.createTextNode('Web browser JavaScript'));     = 텍스트노드만들어서 a태그에붙여주고
+ 
+
+        target.replaceChild(a,target.firstChild);                             =target.firstChild를 a로바꿔치기한다.!  
+
+             
+ 
+
+
+------------------------------------------------------------------------------------------
+그외..?
+
+값
+
+Node 객체의 값을 제공하는 API
+
+ Node.nodeValue
+ Node.textContent
+
+------------------
+자식관리
+
+Node 객체의 자식을 추가하는 방법에 대한 API
+ Node.appendChild()
+ Node.removeChild() 
+ 
+위에있다 
+
+------------------------------
+
+ 문자열로 노드제어  API
+
+ 추가하고싶은 엘리먼트를 코드를사용해서 만든다 쉽게 ~ 
+
+
+변경--------------------
+
+ *  innerHTML 
+
+  target.innerHTML = "<li>JavaScript Core</li><li>BOM</li><li>DOM</li>";  
+
+  이렇게하면 타겟하위 html코드를 저렇게 바꿀수있다 creat 이딴거안해도 쉽게할수있지~ 
+-------
+ 
+ * outerHTML
+
+ target.outerHTML = "<ol><li>JavaScript Core</li><li>BOM</li><li>DOM</li></ol>";
+      
+ 하위가아닌 자기자신도포함한다. 
+
+
+--------
+
+ * innerText, outerText
+
+ innerHtml, outerHTML과 다르게 
+ 이 API들은 값을 읽을 때는 HTML 코드를 제외한 문자열을 리턴하고, 
+ 값을 변경할 때는 HTML의 코드를 그대로 추가한다.
+
+
+---------
+
+ * insertAdjacentHTML()
+
+  좀 더 정교하게 문자열을 이용해서 노드를 변경하고 싶을 때 사용한다.  끼워넣기 ? 
+
+       var target = document.getElementById('target');
+       target.insertAdjacentHTML('beforebegin','<h1>Client Side</h1>');
+                                  afterbegin 
+				  beforeend
+				  afterend
+
+
+
+
+
+
+

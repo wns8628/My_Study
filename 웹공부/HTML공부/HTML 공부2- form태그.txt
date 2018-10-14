@@ -1,0 +1,116 @@
+--<form></form> 폼태그--
+
+정보를 보낼때 전송하는것 입력하는것, 
+사용자가 입력한 정보를 서버로 전송할때 사용할떄 그러한것들 
+
+
+  폼안에서 쓰는 태그들   
+
+       <input>                                      			 =  사용자가 입력할것을만드는것
+       
+       <input type ="text" name="id"> 				         =  입력가능한 텍스트박스를 만듬
+       <input type ="password" name="pwd">            			 =  패스워드박스를만듬(**으로 표시)name 속성은 구별하기위해 쓴다 꼭 정의해줘라                                                         
+       <input type ="password" name="pwd" value="기본">                  =  기본적으로 적혀서나오는값 표시 
+       <input type="submit">                                             =  전송버튼만들기(어디로??)
+
+       <input type="button">                                             =  버튼만들기 (자바스크립트쓸때 주로쓴다)
+       <input type="button" value="버튼" onclick="자바스크립트">         = 이런식으로 씀
+
+       <input type="reset">                                              =  리셋버튼(폼태그안에있는 사용자입력창의 정보를 전부다없앰(초기화)
+       
+       <textarea></textarea>                                             =  여러줄을입력받는텍스트창(본문창) * input안쓰고 닫힘태그필요
+       <textarea name="" id="" cols="30" rows="10">기본</textarea>       =  이런속성들이 있다 딱보면먼지는알겠지
+
+	
+	
+       *선택태그
+        
+	<select></select>					       = 드롭박스(콤보박스)만드는 태그 
+        <select name="color2" multiple>                                = 네임속성을줘서 ?color2="" 이런식으로 가능 multiple은 다중선택!
+        
+	<option></option> 					       = 드롭박스안에있는 옵션을 묶어준다 이태그로
+        <option value ="red">붉은색</option>                           = 이런식으로 value속성을줘서써라 컴퓨터가 알아먹기쉽게!
+
+
+       *라디오버튼
+
+ 	
+	 <input type="radio"  name="color2">                           =  같은 name 의 버튼들은 하나만 선택가능 중복 x
+
+        붉은색 :  <input type="radio"  name="color" value="red">       =  선택했을떄 value 속성으로 어떤값이되는지 정의하면됨 
+
+          
+
+      *체크박스 
+
+		<input type="checkbox">                                = 체크박스만듬 같은name끼리 공유
+   <input type="checkbox"  name="size" value="값" checked>             = 이름주고 밸류주고 checked속성은 디폴트로체크되어있는값 설정!
+
+       
+	
+	
+
+     *어디로 전송할것인가? 를나타내는게 <form> 태그이다
+
+       <form action="">                                = 액션속성에 보낼페이지 주소를 적으면된다
+
+
+
+     * hidden field
+ 
+      <input type="hidden" name="hide" value="egoing">   = ui는 없지만 전송을누르면 브라우저에 ~~?hide= egoing 이런식으로뜸
+ 							 = 즉 눈에보이지않지만 서버로 전송할때쓴다
+
+
+     *<label> 태그
+
+      <label for="id_txt">text<label> :                  =이름표를달아준다?라는느낌 for속성을정의하고
+      <input id="id_txt" type="text" name = "id">        =여기 id값을 for속성과 똑같이 주면 두개가 연결됨(글자만클릭해도 커서가이동됨)
+           
+      <label>password :
+      <input type="password" name="pwd">                 = 귀찮으면 그냥 이렇게 <label>태그로 감싸주면됨 
+      </label>
+       
+      <label>
+      <input type="checkbox" name="color" value="red">붉은색  =뭐 이런식으로 쓸수있겠지
+      </label>
+
+    
+
+     *method 속성
+       데이터를 전송할때 ex)http://localhost/hidden.php?id=egoing 이런식으로 데이터를 전송했다(submit)  =  GET방식 (url을이용해서 전송)
+                                                                   
+       <form action="http://localhost/hidden.php" method="post">   이렇게써서 데이터전송방식을 정의     =  POST방식 (데이터를숨겨서전송) 
+    
+     ------ form 태그를 이용해서 정보를입력해보낼때는 99% POST 방식으로 처리한다!! -----------------
+
+     
+     *파일 업로드
+
+    <input type="file" name="필요한값">                                                        = 파일을업로드할수있는게 나옴
+
+    <form action="http://localhost.upload.php" method="post" enctype="multipart/form-data">    =보낼때 form태그에 이렇게씀
+                                        
+     ----- 파일을업로드할때 무조건form 에서 데이터전송방식은 post 그리고 잉크타입=enctype=""multipart/form-data" 를적는다 그냥외워요-----
+
+
+      
+
+   
+    
+
+
+	
+   
+     
+  
+                                                        
+    
+
+
+
+
+
+
+
+  

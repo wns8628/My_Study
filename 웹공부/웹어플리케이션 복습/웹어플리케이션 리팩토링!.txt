@@ -1,0 +1,25 @@
+리팩토링 = 사용자가쓰는건 변화가없는데 개발자입장에서 코드를더 효율적으로 하는것 (중복된부분제거등)
+
+!!!원칙 = 중복의 제거 
+
+
+
+1] conn.php 를만들자 그리고 중복된코드 즉 db연결코드를 가져와서 붙여넣어! 
+
+2] require_once 함수를이용해서 링크를 연결해주면됨
+
+ex) require_once('conn.php');   //conn.php에는 db연결코드가있겠죠?
+
+
+--------------
+3] style.css
+
+css코드도 중복이니 이걸 style.css 파일을또 만들어서 거기다 중복된코드를넣고
+
+ 
+원래있던자리에 링크를 
+
+    <link rel="stylesheet" href="style.css"
+    media="screen" title="no title" charset="utf-8">
+
+이렇게주면된다 !! 

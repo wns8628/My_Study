@@ -1,0 +1,154 @@
+객체
+
+배열과비슷 배열은 인덱스가 0,1,2 인데 
+
+     객체는 사용자지정이가능 문자든 숫자든 
+
+ 
+	var 배열이름 = {'egoing': 10, 'k8805': 6, 'sorialgi': 80};  :이런식으로만듬
+                          
+                         인덱스가 egoing 이다 key라고부른다. 10은 value 라고한다.
+
+            
+	var grades = {};
+	grades['egoing'] = 10;
+	grades['k8805'] = 6;
+	grades['sorialgi'] = 80;        이렇게도만들수있고
+
+
+	var grades = new Object();
+	grades['egoing'] = 10;
+	grades['k8805'] = 6;
+	grades['sorialgi'] = 80;        이렇게도만들수있다.
+
+
+
+ --가져오는법(속성에접근하는법)
+
+  배열이름['egoing']; 이런식으로하거나 
+
+  배열이름.egoing;    이런식으로가능
+
+
+
+
+- 객체는 순서가없다. 
+
+그래서반복문으로 꺼내올때는
+
+	var grades = {'egoing': 10, 'k8805': 6, 'sorialgi': 80};
+
+
+	for(key in grades) {
+			    document.write(key + grades[key]+"<br />");
+			  }
+
+
+          이런식으로 한다 for 안에 key는변수다이다 key값을저장하는(ex:egoing)같은  (약속)
+
+          다른변수명써도됨 빼와서출력할때는  키를빼는것은 key를 쓰면되고 
+                                             키의 value는 객체[key] 이렇게하면된다 
+ 
+                                             왜? key는 인덱스같은개념이니깐
+
+
+
+
+*for(key in grades) 이거는객체말고 그냥 배열에도 사용가능하다 -개편리 
+
+
+
+*******************객체에 담길수있는것 *******************************************중요!!!!!
+
+var grades = {
+             'list': {'egoing': 10, 'k8805': 6, 'sorialgi': 80},
+    	     'show' : function(){
+      				  for(var name in this.list){
+           			 document.write(name+':'+this.list[name]+"<br />");
+        			}
+  	       }
+	};
+
+ 
+객체안의 키(list)의 값(value)으로 : 객체가 올수있다.
+
+
+ 즉 grades[list] 를하면 값, 즉 {'egoing': 10, 'k8805': 6, 'sorialgi': 80} 이걸말함 
+
+ 10을뽑고싶으면 
+
+ grades['list']['egoing']; 이러면되겠지
+
+ 
+ 그리고 키의 값으로 : 함수도올수있다. 
+
+ 함수를사용(값이다)할려면 grades['show']();   를하면된다. 
+                          grades.show();
+
+ 
+ *this     = 약속된변수 (함수를 가지고있는 객체를 가르킨다,)
+
+ this.list   를하면 grades.list  와같다. 
+ this['list']       grades[list]
+
+
+ 리스트를 다뽑아서 보여주고싶으면
+
+ show 즉 값이 함수니깐 그함수안에 
+
+  for(var name in this['list']){
+         document.write(name, this['list'][name]); 이렇게하고 
+  } 
+
+ grades.show();           이렇게부르면되겠지?
+ grades['show'](); 
+
+
+
+ 
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+     
+        
+
+
+
+
+
+
+

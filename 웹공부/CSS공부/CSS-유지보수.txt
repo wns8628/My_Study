@@ -1,0 +1,67 @@
+유지보수
+
+
+ * link, import
+
+	- 중복이 일어나면 : 유지보수가 어렵고 / 코드이해도가 낮아지고 / 사용자와 개발자의 비용이 증가하는등의문제
+
+	link, import : 중복의 제거를 위해 css파일을 외부로 빼는 기능   
+
+		ex)style.css
+
+	- 방법 : <link> 태그 혹은 <style> 태그 안에 @import로 css파일 삽입 : 같은기능
+
+		1] <link rel="stylesheet" href="style.css">   
+    
+		2]    <style>
+	       		 @import url("style.css")
+	    	     </style>                            =css파일안에서 css를불러오는?
+
+ 
+
+ * minify          (아직안봄 웹사이트가 커졌을때 봐도된다) 
+
+   css코드를 작게만든다(압축) 서버와 클라이언트의 전송되는 데이터의양을줄인다.
+	
+	-cleancss같은 사이트 이용
+	-보통 경량화한 파일에는 ~~~.min.확장자 같이 .min이 들어감 
+
+
+ * preprocesser 
+    
+    -표준화된 css문법은 아니지만 더 편리하게 개인이 커스터마이징한 기능들을 쓸 수 있고 
+     그것을 css표준문법으로 변환해주는 기술 
+    
+    -문법+컴파일러 = 프리프로세서-     
+
+
+     **스타일러스를해보자
+ 
+       브라켓에 추가확장설치하고 추가정보에서 보면 
+      // out: ../dist/app.css, compress: true, sourcemap: true  이걸이용하는거다
+
+        ex) 1] pp.styl           이런파일만들고 위에다가 
+            2] //out: pp.css, compress:true 이런식으로 적으면된다.(코드경량화(미니파이))기술까지있다.
+                              (미니파이기능)   
+
+   
+    **명령어로 컴파일하기 - node.js를 좀알아야함 아직안함 나중에필요할떄보자. (실시간으로 실행저장해서 편리!) 
+			  - 에이터가 확장기능이없어도 우리가 직접컴파일할수있다는장점
+                          - 순차적작업처리 가능      
+
+
+    **스타일러스문법 = 아직제데로안봄 그렇게까지 필요가없어서
+
+
+ 아래는 대표적인 preprocessor들입니다. 
+ http://lesscss.org/  (온라인 변환기)
+ http://sass-lang.com/
+ http://stylus-lang.com/ (온라인 변환기) 
+
+ 아래는 이런 도구들에 대해서 비교한 사이트입니다. 
+ https://csspre.com/compile/
+
+
+ 
+   
+

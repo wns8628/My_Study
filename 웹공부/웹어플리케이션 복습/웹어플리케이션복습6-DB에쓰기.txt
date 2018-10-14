@@ -1,0 +1,179 @@
+자이제 데이터를 직접써서 저장하는걸 해보자
+
+일단 h1 즉 대제목에 링크를걸어서 홈피로가게하자
+
+  <h1> <a href="index.php">생활코딩 JavaScript</a></h1>
+    
+이렇게 ㅎ
+
+근데 메인가면 오류가있네 ?왜 메인홈피는 id값이 없으니깐 본문에 나올게없으니 이지랄임 
+
+그래서 if문으로 아디값이 있을때만 출력하도록하면되겠지
+
+if(empty($_GET['id'])){                  //아디값이 없으면            
+        echo "Welcome";
+      }
+	else{
+    		  $id = mysqli_real_escape_string($conn,$_GET['id']);
+        	  $sql = "SELECT topic.id, topic.title, topic.description,
+       		 user.name, topic.created  FROM topic LEFT JOIN user ON topic.author = user.id WHERE topic.id= ".$id;
+        	//원하는것만 추려서 조인해서 가져옴
+        	 $result = mysqli_query($conn,$sql);
+          	 $row = mysqli_fetch_assoc($result);  
+        ?>                                           
+                       <h2><?=htmlspecialchars($row['title'])?></h2>
+                       <div><?=htmlspecialchars($row['created'])?> | <?=htmlspecialchars($row['name'])?></div>
+                       <div><?=htmlspecialchars($row['description'])?></div>
+        <?php     
+      }
+     ?>                                    //php코드안에<h2> 같은html있으면오류남 그래서이렇게함
+
+
+자이제 쓰기버튼을만들기위해 
+
+쓰기페이지를만들자
+
+write 페이지에 
+
+복붙하고 article 즉 본문만 바꾸면됨 
+
+     <article>
+       <form class="" action="index.html" method="post">
+         <p>
+           <label for="title">제목 : </label>             //for하고 title 쓰고
+           <input id = "title" type="text" name="title">  //여기다 id값으로 title을쓰면 두개가 호환이됨 즉 제목을누르면 자동커서이동
+         </p>
+         <p>
+           <label for="author">저자 : </label>
+           <input id = "author"type="text" name="author">
+         </p>
+         <p>
+           <label for="discription">본문</label>
+           <textarea id="discription" name="discription" rows="8" cols="80"></textarea>
+         </p>
+         <p>
+           <input type="submit" name="" value="전송">
+         </p>
+       </form>
+       </article>
+
+//
+<p> 태그로 단락을 묶어주고  
+
+ 전송버튼을 만들고 이버튼을누르면 어떻게되는지 정의하기위해 (액션에정의한 곳으로 데이터를 포스트란방식으로 전송된다)
+
+form 태그를 써서 전체로 묶어준다 ok?
+
+그래서 action= 에 전송한 데이터를 처리하는 process.php 라는것을 만들자 
+
+process.php 가 데이터를 받아서 데이터베이스에 저장하도록하는거임 
+
+POST방식으로 전송했으니        // <>GET방식으로도 전송가능 근데 이거는URL로 나타남 (?id=1)뭐이런거할떄필요?
+
+$_POST 로 받으면된다 //약속된것임 (php가만든 배열이 담겨있다)
+
+			//확인해봐? print_r($_POST); 이걸로확인해봐라
+			//저장용도는 POST로 꼭 전송해라! 
+
+
+ -----자!이제--------
+
+process.php 가데이터를 받았으니 처리하는법을 해보자! 
+
+일단 이것의 역할이뭐냐? 
+
+사용자가 입력한 정보를 받아서 데이터베이스에 저장하는 역할이다! 
+
+데이터를 읽어오는것 쓰는걸 알면 수정이런걸뭐 할수있다 응용만잘하면
+
+---------------------이순서로한다 
+
+//데이터베이스 접속 
+$conn = mysqli_connect('localhost','root','twiceioi');
+mysqli_select_db($conn,'wnstest');
+
+//저자가 user테이블에 존재하는지 여부를 체크
+$sql= "SELECT * FROM user WHERE name='".mysqli_real_escape_string($conn, $_POST['author'])."'" // 보안문자넣자! 근데 너무길다 그래서
+
+$author = mysqli_real_escape_string($conn,$_POST['author']);
+$sql = "SELECT * FROM user WHERE name='".$author."'";
+$sql = "SELECT * FROM user WHERE name='{$author}'"; //따움표많으면 힘드니 이렇게해도됨
+
+이렇게하면 편하지? sql문 만들었으니 
+echo $sql; 로  오류없는지 체크해봐라 꼭 
+
+$result = mysqli_query($conn, $sql); //그리고 만든 sql문을 db로 날려서 결과값을받아와서 $result 를 저장
+
+어떤것이 저장됬는지 아주 자세하게알려면 
+
+var_dump($result);
+
+이걸쓰면되는데 거기서 존재하는지 ? 이걸나타내는게 num_rows 이다 
+
+var_dump($result->num_rows); //이렇게하면 딱그부분만 뽑아낼수있다 int(개수) 이런식으로
+
+   이걸 이용해서 
+
+//존재한다면 그 user의 id값을 알아내자 = user.id
+
+if($result->num_rows > 0){                    //하나라도 존재한다면 0이상이면
+  $row = mysqli_fetch_assoc($result);         //데이터를 php가 알아먹게 가공(연관배열형식으로) 한행가져옴 그걸 $row에담음
+  var_dump($row['id']); 		       //확인해서 여기서 필요한건 id값을알아내면되니깐 저렇게씀
+  $user id = $row['id']				//아디값을 $user id 에 담는다 ㅇㅋ! 
+}else{
+    //존재하지 않는다면 저자를 user 에 추가후 id를 알아낸다.
+
+    $sql = "INSERT INTO user  (id,name,password) VALUES(NULL, '{$author}', '');";   //이렇게 패스워드도정의해야할듯.. 시발
+    $result = mysqli_query($conn, $sql); 
+    
+    //자 이렇게 쿼리를만들고 디비에전송했다 ! 이제 그 추가된 이사용자의 아이디값을알아내야함 
+	
+       $user_id=  mysqli_insert_id($conn); //**이함수를쓰면된다(api) 바로직전에 insert문이 실행된 것의 행의 아디를 알아낸다!!
+
+		
+}
+
+
+$title = mysqli_real_escape_string($conn,$_POST['title']);
+$description = mysqli_real_escape_string($conn,$_POST['description']);  //쓰기에서 사용자가 입력한 정보를 이렇게 변수에담고
+
+
+
+
+//제목,저자,본문 등을 topic 테이블에 추가
+
+$sql = "INSERT INTO `topic` (`id`,`title`,`description`,`author`,`created`)
+        VALUES (NULL,'{$title}','{$description}','{$user_id}',now());"; //그정보를 가지고 쿼리문을 만든다!! 이걸디비날리면 저장되겠지
+
+확인해볼려면 echo $sql; 해서 확인해봐
+
+
+  mysqli_query($conn,$sql);  //디비에날리는거 저장되겠찌?
+
+
+  header('Location: index.php'); // 마지막으로 저장되고난뒤 메인홈피로가는거! 
+
+
+
+
+-----------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+			
+
+
+
+
+
+
+

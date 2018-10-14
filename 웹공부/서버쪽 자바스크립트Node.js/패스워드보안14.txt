@@ -1,0 +1,273 @@
+비밀번호보안 -  암호화 - 생소 
+
+암호화를해야하는 이유, 방법을이해하자
+
+ * md5 = 안씀 쓰레기라
+
+  단방향-  원래의 문자를 암호화된문자로 바꿀수는있다. 하지만 다시 원래의 문자로 되돌릴수 없다.
+
+ 
+
+ 평문으로 되있는 암호를 복화를할수없게 단방향으로 암호화하자.
+
+
+  - salt 친다.
+
+	md5(pwd+user.salt) === user.password
+
+
+        salt변수 + 원래 사용자비번을더해서 = 해쉬코드를 얻으면 해독도어렵다. 
+
+
+---------------------------------------
+
+ * sha256  - 이걸더씀(모듈설치)
+ 
+       salt방법이랑 거의동일 해쉬코드가 더복잡해짐
+
+
+-------------------------------------------------------------
+
+ * PBKDF2 - 단방향비번을 좀더안전하게함
+  (모듈설치)   
+
+	var bkfd2Password = require('pbkdf2-password');
+	var hasher = bkfd2Password();
+
+ 1] 모듈넣고 
+
+var users = [
+  {
+    username:'egoing',
+    password:'/aeXWCEMf15jR1afW',
+    salt:'1CM2Gb2S7fNc9TN1RH',
+    displayName:'Egoing'
+  }
+
+ 2] 이런식으로 회원들 정보 정의한뒤에
+
+  for(var i=0; i<users.length; i++){
+    var user = users[i];
+    if(uname === user.username) {
+     return  hasher({password:pwd, salt:user.salt}, function(err,pass,salt,hash){   
+          if(hash === user.password){
+            req.session.displayName= user.displayName;
+            req.session.save(function(){
+              res.redirect('/welcome');
+            })
+          } else {
+            res.send('who are you?<a href="/auth/login">login</a> ');
+          }
+      });
+    }
+  }
+
+이렇게쓴다.
+
+-----------------------------------------------
+
+ 회원가입- PBKDF2 이용
+
+app.post('/auth/Register',function(req,res){
+    hasher({password:req.body.password},function(err,pass,salt,hash){     //해쉬객체호출 
+      var user = {				
+        username:req.body.username,				
+        password:hash,						       //솔트랑더한값이라서 
+        salt:salt,							//솔트를넣어줌 
+        displayName:req.body.displayName,
+      };
+      users.push(user);
+      res.redirect('/welcome');
+    });
+});
+
+
+----------------------------------------------------------------------------------
+
+
+ Passport - 인증(Authentication)을좀더 쉽게 하는 모듈  -어렵다 .. 
+
+ 세션을 우리가관리하는게아니라 패스포트가 알아서해줌. 
+
+--- local 전략인증 ----
+
+ 1] 세팅 
+
+     npm 으로깔고
+
+	var passport = require('passport')
+	var LocalStrategy = require('passport-local').Strategy;     =>  추가하고
+  
+
+	app.use(passport.initialize());
+	app.use(passport.session());   //패스포트초기화 하고 우리의레고에조합한거겟지  인증에세션을사용하겟다.
+                                       // * 세션모듈이있어야됨
+          
+
+  2] 폼태그에서 
+
+        아디는 무조건 username 
+        비번은        password    해야함 그래야 패스포트가 찾는다. ! 
+ 
+
+  3] 폼으로 post방식으로 보냈을때 받는 라우터의 콜백에 (저것을적어준다=미들웨어)
+
+app.post('/auth/login',
+  passport.authenticate(
+    'local',						=> 로컬이라는 로그인방식 실행 (전략) 
+     { successRedirect: '/welcome',			=> 성공시 리다이렉션 
+       failureRedirect: '/auth/login',			=> 실패시 리다이렉션
+       failureFlash: false }				=> 실패시 왜틀렷는지 메세지?
+     )
+   )                                   : 약속이다.
+
+
+
+ 4] 로컬전략이라서 이렇게구현 
+
+passport.use(new LocalStrategy(
+  function(username,password,done){              //콜백 인자3개 받음
+      var uname = username;
+      var pwd   = password;
+
+      for(var i=0; i<users.length; i++){
+        var user = users[i];
+        if(uname === user.username) {
+         return  hasher({password:pwd, salt:user.salt}, function(err,pass,salt,hash){
+              if(hash === user.password){
+                done(null, user); //아디비번이 맞다면
+              } else {
+                done(null, false); //아디비번틀리면 이게실행
+              }
+          });
+        }
+      }
+      done(null, false);  //아디비번이없다면 이게실행
+  }
+));
+
+
+ 5] 아디비번이맞다면 이게실행 - 딱한번 호출됨
+	passport.serializeUser(function(user, done) {     //user인자랑 done(null,user)인자랑같아야함
+  	done(null, user.username);	                  //한명한명구별하는식별자를 넣어줘야됨 =>세션등록 (보통 db에서 id값을씀)        
+	});
+
+
+ 6]    두번째부터는 이게호출됨
+	//처음말고 나중에 다시접속했을때 이콜백이실행 즉 식별자 user.username 이 id로오겠지
+	passport.deserializeUser(function(id, done) {     //여기서 id는 위에 식별자를 말한다 username이지
+  	for(var i=0; i<users.length; i++){ 
+    	 var user =users[i];		
+    	  if(user,username === id){
+     	     return  done(null, user);  //실제사용자를 찾는거임 사용자가 있으면 user인자를 넣어줌
+  	  }
+  	}
+     });
+
+
+
+ 7] 아디비번 맞으면 
+  app.get('/welcome', function(req,res){
+  if(req.user && req.user.displayName){             //req.user를 쓸수있게 객체가생김 6]번에의해
+    res.send(`
+      <h1>Hello, ${req.user.displayName}</h1>
+      <a href="/auth/logout">logout</a>
+      `);
+  }
+
+-----------------------
+ 부록 
+
+passport.serializeUser는 처음 client가 web page에 접속 하여 로그인을 하는 경우 session에 값을 등록해주는 
+
+기능을 가지고 있습니다. 인자로 전달받은 user 객체의 정보를 이용하여 done의 두번쨰 인자로 user.username 
+
+을 session에 값으로 등록해주는 과정입니다. client가 다른 페이지나 현재 페이지를 reload 하는 경우 
+
+passport.deserializeUser는 인자로 전달받은 user.username 즉, 현재 session에 등록된 값을 이용하여 
+
+ 기존에 저장된 데이터와 일치하는 정보를 찾은 후 done의 두번째 인자로 user의 정보를 담은 객체인 user를 
+
+ 전달합니다. 
+
+
+
+ 이런식으로 흐름이 흘러간다.~
+-------------------------------------------------------------------------------------------------------------------------
+
+ Federation Authentication(타사 인증) 
+ 페도레이션
+
+ 사용자가 회원가입안해도됨. 
+ 사용자의 정보를 내가 안가지고 있어도된다. (부담이덜됨)
+ 간단한 식별자만 가지고있으면됨.  
+
+
+ 1] 일단 페이스북 디벨로퍼가서 앱만들고 (앱아디, 앱시크릿코드)
+ 
+ 2] var FacebookStrategy = require('passport-facebook').Strategy;
+ 
+    그리고 모듈을 추가한다.
+   
+    2.1) 로그인페이지에 페북링크건다. 경로는  /auth/facebook
+       
+  
+ 3] app.get('/auth/facebook',
+	 passport.authenticate(           페이스북전략을쓰겠다.하고 라우터추가)
+  	'facebook'
+  	 )
+ 	);
+
+
+ 4]//페북스트레티지 를 구현
+passport.use(new FacebookStrategy({
+    clientID: FACEBOOK_APP_ID,                     => 앱아디넣고
+    clientSecret: FACEBOOK_APP_SECRET,		   => 시크릿코드넣어라 
+    callbackURL: "/auth/facebook/callback"         => url을 밑에추가된 라우터경로로바꿈 
+  },
+  function(accessToken, refreshToken, profile, done) {
+    User.findOrCreate(..., function(err, user) {
+      if (err) { return done(err); }
+      done(null, user);
+    });
+  }
+));
+
+-----
+
+ 5] 한번더 라우터를 거친다.
+
+ app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { successRedirect: '/welcome',       =>로그인성공시 
+                                      failureRedirect: '/auth/login' })); => 실패시 일로보냄
+          
+
+
+ 라우트를 두번거치는 이유는? 페이스북에서 확인을누르면 정보를추가해서 
+
+ /auth/facebook/callback 으로 다시보낸다. 그래서 두번을 거치는것
+
+
+------------------------------
+
+ 6] 4번에서 2번째 인자 콜백에서 인자는
+
+function(accessToken, refreshToken, profile, done) {   => profile이 젤중요 
+    User.findOrCreate(..., function(err, user) {
+      if (err) { return done(err); }
+      done(null, user);
+    });
+  }
+));
+
+
+
+
+
+
+
+
+
+
+
+

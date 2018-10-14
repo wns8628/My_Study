@@ -1,0 +1,12 @@
+sql server 다운로드받기 
+
+DatabaseServer 이고 밑에 꺼는 Database에 접속할수 있는 쿼리분석기 입니다. (두개필요)
+
+맨위에 클러스터 뭐시기 설치하기누르고 
+
+ ssms ? 깔자 
+
+
+?? ssms 깔아야됨
+
+출처: http://nowonbun.tistory.com/142?category=509987 [명월 일지]
