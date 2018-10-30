@@ -1,0 +1,60 @@
+컴포넌트 매핑
+
+ 배열렌더링시 자바스크립트 map()메소드사용 
+
+ map()메소드는 파라미터로 전달된 함수를 통하여 
+ 배열 내의 각 요소를 처리해서 그결과로
+
+ "새로운 배열생성"
+
+ arr.map(callback,[thisArg])
+
+    callback 새로운 배열요소를 생성하는 함수-  3가지인수가짐 
+						currentValue 현재처리되고있는요소
+                                                index        현재처리되고있는요소의 index값
+                                                array        메소드가 불려진 배열 
+   
+    thisArg(선택) callback함수 내부에서 사용할 this값설정 
+          				
+ -----
+  es6로 작성하면
+
+  let numbers = [1,2,3,4,5]
+
+  let result = numbers.map((num)=>{
+   return num*num;
+   });
+
+			 function(num){ 
+					 이걸 그냥 (num)=>{ } 이렇게줄임
+			 }
+
+
+  let one = a => console.log(a);  
+
+     이건 이거다.
+ 
+  var one = function one(a) {
+    return console.log(a);
+   };
+
+
+----------------------------------------
+let one = a => console.log(a);
+
+let numbers = [1,2,3,4,5]
+ 
+let result = numbers.map( num => {return num*num} );
+
+let three = (c,d)=>{ console.log(c,d) }
+
+let four = () =>{ console.log('no params') }
+
+ 
+
+  
+----------------------------------------------------------
+
+ 리엑트에서 똑같은 원리로 배열을 컴포넌트로 매핑이가능하다.
+
+ 
