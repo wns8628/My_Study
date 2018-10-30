@@ -1,0 +1,67 @@
+- 유동적인데이터 
+
+- JSX내부에 {this.state.stateName}
+
+- 초기값 설정이 필수 , 생성자(constructor)에서 this.state={}으로 설정
+
+- 값 수정시 this.setState({...}), 렌더링 후 this.state = 절대사용금지
+
+
+
+
+ 초기값설정시 constructor(props){super(props) this.stat={~~}} //이렇게 해줘야함 부모생성자호출로해야 쓸수있다.
+
+ 
+ *자바스크립트컴포넌트에서 메소드를 실행할떄 this가뭔지모름 
+
+  그래서 바인딩해줘아함 .bind(this) 생성자에서 바인드해줘야보기가좋다.
+
+  그리고 함수부를때 괄호넣으면 렌더할때마다 실행되서 ㅈ됨
+
+
+
+
+
+
+--------
+<div id="root"></div>
+---------
+
+class Counter extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      value:0
+    };
+    this.handleClick = this.handleClick.bind(this);
+   }
+  
+  handleClick(){
+    this.setState({
+      value:this.state.value + 1
+    });
+    //this.state.value = this.state.value+1 이렇게 절대금지 ㅇㅋ? 
+  }
+  
+  render(){
+    return(
+      <div>
+        <h2>{this.state.value}</h2>
+        <button onClick={ this.handleClick }>Press Me</button>
+      </div>
+    )
+  }
+}
+
+class App extends React.Component {
+  render() {
+    return (
+      <Counter/>
+    );
+  }
+};
+
+ReactDOM.render(
+  <App></App>,
+  document.getElementById("root")
+);

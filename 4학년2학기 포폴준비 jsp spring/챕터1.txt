@@ -1,0 +1,47 @@
+프로젝트만들면 
+
+ 여러가지 폴더가있는데 거기서
+
+ Java Resources 
+
+ WebContent 
+
+ 이두개만거의 쓴다. 
+
+
+ Java Resources 
+	-src = 자바소스들어감
+	
+
+ WebContent 
+	-js, html,jsp등등 이미지등 다들어감
+ 
+----------------
+
+ html, css , js
+
+-- js는 html css등을 동적컨트롤한다. 
+
+ 
+-----------------------------------
+ 
+ DOM - 문서객체 집합 , 즉 문서내의 요소(태그)를 컨트롤하기위한 객체들의 집합 
+
+
+ jquery - 돔을 더 쉽게다루는 라이브러리이다 . 다운받아서쓰던지 , CDN방식쓰던지(네트워크 경로로가져옴)
+
+--
+
+ jquery = $  이다.
+
+ $(window.document).ready.function().function() ... 메소드체인방식이다. 
+ 
+
+
+ $(document).ready(function(){    //이건 window.onload = function(){ alert("안뇽") }   이거랑같다 페이지가 로드된이후에 실행됨
+   alert("안뇽");                          
+ });
+
+
+--------------- 등등 알아둬라 .. 
+ 
