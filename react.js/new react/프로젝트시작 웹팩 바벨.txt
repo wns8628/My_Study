@@ -1,0 +1,47 @@
+환경세팅 
+https://velopert.com/814
+
+- GIT
+- NPM(yarn) / NODE 
+- MONGODB
+- EDITOR (Atom, Bracket, Sublime, Editplus, Vim …)
+
+-- 폴더만드고 경로들가서 npm init - 노드프로젝트 시작명령어라고 생각해라
+
+리액트 프로젝트는 보통 우리가 옛날에 jQuery 같은것을 단순히 
+<script src="..."><script> 의 형태로 불러와서 사용했던 것 처럼 
+사용하지는 않습니다. 그렇게 하려면 할 수 는 있는데 굉장히 제한적입니다.
+ 그 대신에, 리액트 프로젝트를 제대로 작업 하려면 여러분의 컴퓨터에 
+Node, yarn, Webpack, Babel 등의 도구를 설치하여 프로젝트를 설정해주어야 합니다.
+
+리액트 프로젝트를 바닥부터 설정하는 것은 초심자에겐 꽤나 복잡한 작업입니다.
+다행히도, 페이스북에서 제공해주는 도구create-react-app를 통하여 이 작업을
+간단하게 준비해줄 수 있답니다.
+
+
+*Yarn: Yarn 은 조금 개선된 버전의 npm 이라고 생각하시면 됩니다. 
+
+-- 
+webpack-dev-server ? wepback에서 지원하는 간단한 개발서버로서 별도의 
+서버를 구축하지 않고도 웹서버를 열 수 있으며 hot-loader를 통하여 코드가 
+수정될때마다 자동으로 리로드 되게 할 수 있습니다.
+
+---------------------------------------
+
+create-react-app - 모든걸해결해줌 
+
+ yarn global add create-react-app
+
+ create-react-app hello-react
+
+ cd hello-react
+ yarn start           //서버실행 프로젝트 준비끝
+
+---------------------------------
+
+ 웹팩 - 여러개로분리된 js파일이나이런것들을 하나로 묶어준다.
+
+ 바벨 - es6를 es5로 바꿔줌 호환위해서..
+
+
+

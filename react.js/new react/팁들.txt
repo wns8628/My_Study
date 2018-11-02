@@ -1,0 +1,46 @@
+
+
+-submit클릭시 새로고침 안되게 하는법 
+
+
+    handleSubmit = (e) => {
+        e.preventDefault();		//이함수만들고 
+    }
+
+
+    <form onSubmit={this.handleSubmit}>  //폼에 onSubmit 하고 저렇게 함수부르면됨
+
+-----------------------------------------------------------------------------------------------
+- state배열에 배열값넣을때
+
+ this.setState({
+  array = this.state.array.concat(data)
+ })
+
+
+--------------------------------------------------------------------------------------------------
+
+- 문자열 제이슨형태 보여주기
+
+  {JSON.stringify(this.state.information)}
+
+----------------------------------------------------------
+
+- 비구조 할당 
+
+ const { information } = this.state;
+
+--전개연산자--------------
+
+ function myFunction(x, y, z) { }
+ var args = [0, 1, 2];
+ myFunction(...args); //각각분리해서 넣어줌 
+
+---------------------
+
+Object.assign(target, ...sources)  //
+
+target = 대상 객체.
+sources =하나 이상의 출처 객체.
+반환 값 = 대상 객체.
+

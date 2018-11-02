@@ -55,7 +55,16 @@ class App extends React.Component{
 
            자바스크립트포함시 { } 이렇게
 
-           카멜케이스 backgroundColor : '' 이거쓰는거 봐라
+ 	   /* */ 주석 이것도 div같은 컨테이너 엘레먼트안에작성되야함ㅇㅋ ?  {여기에작성}
 
- 	   /* */ 주석 이것도 div같은 컨테이너 엘레먼트안에작성되야함ㅇㅋ ? 
- 
+ jsx css 처리 ------
+	
+	   css는 기존과다르게 객체로만들어서 사용한다. 	
+
+           css파일불러서 할떄는 class가아니라 *** className 으로써라 ㅇㅋ ?
+
+           주의할것 :  카멜케이스 backgroundColor : '' 이거쓰는거 봐라
+
+  
+   
+
