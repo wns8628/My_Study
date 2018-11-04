@@ -1,0 +1,20 @@
+
+
+    shouldComponentUpdate(nextProps, nextState) {
+        if(this.state !== nextState){
+            return true;
+        }
+        return this.props.info !== nextProps.info
+    }
+     
+
+ 각각에대해서 렌더할떄
+
+ 변화가있는부분만렌더한다.
+
+
+-----------
+
+ 불변성은 원본은 그대로놔두고  : 새로운값을 주입할떄 무조건 새로운배열이나 객채를만들어서 
+
+ 주입을해줘야한다 ㅇㅋ ?
