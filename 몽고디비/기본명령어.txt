@@ -1,0 +1,51 @@
+cmd에서 mongod - 서버열고
+        mongo  - 클라이언트 접속 
+
+---------------
+
+ show dbs - 디비목록보여줌 
+
+------
+
+ use mongodb - mongodb라는 디비를선택해라 (없어도 선택됨 여기에 데이터넣으면 생겨남)
+
+------
+
+ db.sample.insert({ "key" : "value"});  - 디비선택후 명령어실행! sample이라는 컬렉션에 도큐먼트추가
+					  한번에 두개이상데이터넣을때는 배열로넣으면됨 
+					   
+ db.sample.insert([ { "key" : "value1"},{"key":"value2"} ]); - 이렇게
+
+------
+
+ db.sample.find([query],[project])  - 넣은도큐먼트확인// select같은걸로 엄청많다뭔가 다음메모장에서확인하라
+
+------
+ 
+ db.sample.remove(criteria,[justone]) - 도큐먼트제거 ,첫번쨰인자는 제거할조건, 두번쨰는 옵션(기본 false)
+		  {"":""}  false/true								  true면 지울게여러개라도 하나지움 오래된거부터 
+------
+   
+ db.dropDatabase() - 디비선택후 명령어실행! 디비날림  
+
+-------
+
+ db.createCollection("boos") - 북스라는 컬렉션을만들겠다. //근데 알다시피 이거안해도   db.sample.insert 이걸로 저절로만들수있음 
+
+                               구지 이걸쓰는이유는 옵션때문임 
+
+				옵션 1. capped - 컬렉션사이즈고정, 넘을시 기존오래된데이터부터하나씩덮어씀
+										
+					size   - 위에 고정할사이즈를 정함 
+                  
+                                        max    - 사이즈말고 갯수로 정하게하겠다.
+
+                                        autoIndexId - 인덱스값자동설정 (3.4버전부터 이옵션사라짐)   
+
+--------
+
+
+ db.collection_name.drop()   - 컬렉션날림
+
+
+--------
