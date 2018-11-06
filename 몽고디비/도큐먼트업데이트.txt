@@ -1,0 +1,96 @@
+MongoDB에서는 update() 메소드를 통하여 데이터를 수정 할 수 있습니다.
+
+이 메소드의 구조는 다음과 같습니다.
+
+db.collection.update(
+   <query>,
+   <update>,
+   {
+     upsert: <boolean>,
+     multi: <boolean>,
+     writeConcern: <document>
+   }
+)
+
+-----------
+Parameter	Type		설명
+*query	 	document	업데이트 할 document의 criteria 를 정합니다. find() 메소드 에서 사용하는 query 와 같습니다.
+*update		document	document에 적용할 변동사항입니다.
+upsert		boolean		Optional. (기본값: false) 이 값이 true 로 설정되면 query한 document가 없을 경우, 새로운 document를 추가합니다.
+multi		boolean		Optional. (기본값: false)  이 값이 true 로 설정되면, 여러개의 document 를 수정합니다.
+writeConcern	document	Optional.  wtimeout 등 document 업데이트 할 때 필요한 설정값입니다. 기본 writeConcern을 사용하려면 이 파라미터를 생략하세요. 자세한 내용은 매뉴얼을 참조해주세요.
+
+
+----------------------
+
+예제1. 특정 field 업데이트 하기
+// Abet document 의 age를 20으로 변경한다
+> db.people.update( { name: "Abet" }, { $set: { age: 20 } } )
+
+
+예제2. document를 replace 하기
+// Betty document를 새로운 document로 대체한다.
+> db.people.update( { name: "Betty" }, { "name": "Betty 2nd", age: 1 }) //이렇게 새로운 document 로 replace 할 때, _id는 바뀌지 않습니다.
+
+
+예제3. 특정 field를 제거하기
+// David document의 score field를 제거한다
+> db.people.update( { name: "David" }, { $unset: { score: 1 } } )//여기서 score: 1 의 1 은 true 의 의미입니다.
+
+
+예제4. criteria에 해당되는 document가 존재하지 않는다면 새로 추가하기
+// upsert 옵션을 설정하여 Elly document가 존재하지 않으면 새로 추가
+> db.people.update( { name: "Elly" }, { name: "Elly", age: 17 }, { upsert: true } )
+
+
+예제5. 여러 document의 특정 field를 수정하기
+// age가 20 보다 낮거나 같은 document의 score를 10으로 설정
+> db.people.update(
+... { age: { $lte: 20 } },
+... { $set: { score: 10 } },
+... { multi: true }
+... )
+
+
+예제6-1. 배열 에 값 추가하기
+// Charlie document의 skills 배열에 "angularjs" 추가
+> db.people.update(
+... { name: "Charlie" },
+... { $push: { skills: "angularjs" } }
+... )
+
+
+예제6-2. 배열에 값 여러개 추가하기 + 오름차순으로 정렬하기
+// Charlie document의 skills에 "c++" 와 "java" 를 추가하고 알파벳순으로 정렬
+> db.people.update(
+... { name: "Charlie" },
+... { $push: {
+...     skills: {
+...         $each: [ "c++", "java" ],
+...         $sort: 1
+...     }
+...   }
+... }
+... )
+//$sort 값을 내림차순으로 정렬하려면 -1 로 하면 됩니다.
+  배열이 document의 배열이고 그 embedded document의 특정 field에 따라서 정렬을 할 때는 다음과 같이 설정하면 됩니다.
+  $sort: { KEY: 1 }
+
+
+
+예제7-1. 배열에 값 제거하기
+// Charlie document에서 skills 값의 mongodb 제거
+> db.people.update(
+... { name: "Charlie" },
+... { $pull: { skills: "mongodb" } }
+... )
+
+
+예제7-2. 배열에서 값 여러개 제거하기
+// Charlie document에서 skills 배열 중 "angularjs" 와 "java" 제거
+> db.people.update(
+... { name: "Charlie" },
+... { $pull: { skills: { $in: ["angularjs", "java" ] } } }
+... )
+
+
